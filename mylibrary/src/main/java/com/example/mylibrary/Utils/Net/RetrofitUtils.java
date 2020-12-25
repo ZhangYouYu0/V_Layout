@@ -1,5 +1,8 @@
 package com.example.mylibrary.Utils.Net;
 
+import android.util.Log;
+import android.widget.Toast;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -7,7 +10,6 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -16,24 +18,24 @@ import okhttp3.ResponseBody;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
-public class RetrofitUils implements WorkIntefac{
-    private static volatile RetrofitUils retrofitUils;
+public class RetrofitUtils implements WorkIntefac{
+    private static volatile RetrofitUtils retrofitUils;
     private final ApiServcie apiServcie;
 
-    private RetrofitUils() {
+    private RetrofitUtils() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiServcie.BaseUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
-
+        Log.e("TAG", "RetrofitUtils: "+ApiServcie.BaseUrl);
         apiServcie = retrofit.create(ApiServcie.class);
     }
 
-    public static RetrofitUils getRetrofitUils() {
+    public static RetrofitUtils getRetrofitUils() {
         if(retrofitUils==null){
-            synchronized (RetrofitUils.class){
+            synchronized (RetrofitUtils.class){
                 if(retrofitUils==null){
-                    retrofitUils = new RetrofitUils();
+                    retrofitUils = new RetrofitUtils();
                 }
             }
         }
@@ -41,7 +43,8 @@ public class RetrofitUils implements WorkIntefac{
     }
 
     @Override
-    public <I> void Inface(String url, CallBack<I> callBack) {
+    public <I> void get(String url, CallBack<I> callBack) {
+        Log.e("TAG", "get: "+url);
         apiServcie.get(url)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -64,11 +67,12 @@ public class RetrofitUils implements WorkIntefac{
                             e.printStackTrace();
                         }
 
+
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                    callBack.OnErro("网络异常："+e.getMessage());
+                        callBack.OnErro("网络异常："+e.getMessage());
                     }
 
                     @Override

@@ -6,8 +6,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Url;
 
 public interface ApiServcie {
-
-    String BaseUrl = "https://cdwan.cn/";
+//    https://cdplay.cn/api/index
+    String BaseUrl = " https://cdplay.cn/";
     @GET
     Observable<ResponseBody> get(@Url String baseUrl);
 }

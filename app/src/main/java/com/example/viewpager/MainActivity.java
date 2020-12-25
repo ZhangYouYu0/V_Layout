@@ -6,13 +6,11 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.example.mylibrary.Base.BaseActivity;
-import com.example.viewpager.Contract.C;
-import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.Fragment.CollBlankFragment;
 import com.example.viewpager.Fragment.HomeBlankFragment;
-import com.example.viewpager.ImPresenter.Presenter;
+import com.example.viewpager.P.ImPresenter;
 
-public class MainActivity  extends BaseActivity<Presenter> {
+public class MainActivity  extends BaseActivity {
 
     HomeBlankFragment homeBlankFragment;
     CollBlankFragment collBlankFragment;
@@ -78,8 +76,8 @@ public class MainActivity  extends BaseActivity<Presenter> {
 
 
     @Override
-    protected Presenter add() {
-        return new Presenter();
+    protected ImPresenter add() {
+        return new ImPresenter();
     }
 
 }

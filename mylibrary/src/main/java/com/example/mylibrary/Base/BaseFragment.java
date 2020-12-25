@@ -1,5 +1,6 @@
 package com.example.mylibrary.Base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +15,7 @@ import java.util.zip.Inflater;
 public abstract class BaseFragment<p extends BasePresenter>  extends Fragment implements BaseView{
     public p presenter;
 //    View inflate = inflater.inflate(ID(), container, false);
-
+    private Context context =getActivity();
 
     @Nullable
     @Override
