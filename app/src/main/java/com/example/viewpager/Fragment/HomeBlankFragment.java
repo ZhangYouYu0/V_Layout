@@ -3,6 +3,7 @@ package com.example.viewpager.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -11,15 +12,18 @@ import android.view.View;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.Adapter.MainGridAdapter1;
 import com.example.viewpager.Adapter.MainGridAdapter2;
+import com.example.viewpager.Adapter.MainLineranAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter2;
 import com.example.viewpager.Adapter.MainSingleAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter1;
 import com.example.viewpager.Adapter.MainGridAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter3;
+import com.example.viewpager.Adapter.MainSingleAdapter4;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.P.ImPresenter;
@@ -54,6 +58,9 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private MainSingleAdapter3 mainSingleAdapter3;
     private MainGridAdapter2 mainGridAdapter2;
     private ArrayList<FooHomeBean.DataDTO.NewGoodsListDTO> newGoodsListDTOS;
+    private MainSingleAdapter4 mainSingleAdapter4;
+    private MainLineranAdapter mainGridAdapter3;
+    private ArrayList<FooHomeBean.DataDTO.HotGoodsListDTO> hotGoodsListDTOS;
 
     public HomeBlankFragment() {
         // Required empty public constructor
@@ -122,7 +129,6 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         GridLayoutHelper gridLayoutHelper1 = new GridLayoutHelper(2);
         mainGridAdapter1 = new MainGridAdapter1(gridLayoutHelper1, getActivity(),brandListDTOS);
 
-
         SingleLayoutHelper singleLayoutHelper3 = new SingleLayoutHelper();
         mainSingleAdapter3 = new MainSingleAdapter3(singleLayoutHelper3,getActivity());
 
@@ -130,6 +136,15 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         GridLayoutHelper gridLayoutHelper2 = new GridLayoutHelper(2);
         mainGridAdapter2 = new MainGridAdapter2(gridLayoutHelper2,getActivity(),newGoodsListDTOS);
 
+        SingleLayoutHelper singleLayoutHelper4 = new SingleLayoutHelper();
+        mainSingleAdapter4 = new MainSingleAdapter4(singleLayoutHelper4, getActivity());
+
+        hotGoodsListDTOS = new ArrayList<>();
+        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+        mainGridAdapter3 = new MainLineranAdapter(linearLayoutHelper,getActivity(),hotGoodsListDTOS);
+
+
+        
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainSingleAdapter);
         delegateAdapter.addAdapter(mainSingleAdapter1);
@@ -138,6 +153,8 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         delegateAdapter.addAdapter(mainGridAdapter1);
         delegateAdapter.addAdapter(mainSingleAdapter3);
         delegateAdapter.addAdapter(mainGridAdapter2);
+        delegateAdapter.addAdapter(mainSingleAdapter4);
+        delegateAdapter.addAdapter(mainGridAdapter3);
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
 
@@ -171,7 +188,12 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         List<FooHomeBean.DataDTO.NewGoodsListDTO> newGoodsList = i.getData().getNewGoodsList();
         newGoodsListDTOS.addAll(newGoodsList);
         mainGridAdapter2.notifyDataSetChanged();
-    }
+
+        List<FooHomeBean.DataDTO.HotGoodsListDTO> hotGoodsList = i.getData().getHotGoodsList();
+        hotGoodsListDTOS.addAll(hotGoodsList);
+        mainGridAdapter3.notifyDataSetChanged();
+
+            }
 
     @Override
     public void OnErro(String err) {
