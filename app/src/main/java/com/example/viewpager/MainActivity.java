@@ -1,23 +1,17 @@
 package com.example.viewpager;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
-import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
+import com.example.mylibrary.Base.BaseActivity;
+import com.example.viewpager.Contract.C;
 import com.example.viewpager.Fragment.CollBlankFragment;
 import com.example.viewpager.Fragment.HomeBlankFragment;
+import com.example.viewpager.ImPresenter.Presenter;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity  extends BaseActivity<Presenter> implements C.View {
 
     HomeBlankFragment homeBlankFragment;
     CollBlankFragment collBlankFragment;
@@ -25,14 +19,12 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout ll;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-         initView();
-         initFragment();
+    protected int ID() {
+        return R.layout.activity_main;
     }
 
-    private void initFragment() {
+    @Override
+    protected void initData() {
         homeBlankFragment = new HomeBlankFragment();
         collBlankFragment = new CollBlankFragment();
         FragmentTransaction supportFragmentManager = getSupportFragmentManager().beginTransaction();
@@ -41,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
                 .show(homeBlankFragment)
                 .hide(collBlankFragment)
                 .commit();
-
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
         ll = findViewById(R.id.bnt_ll);
         mrg = findViewById(R.id.rg);
         mrg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -61,24 +53,41 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.show(collBlankFragment).hide(homeBlankFragment).commit();
                         break;
 
-                        case R.id.rb3:
+                    case R.id.rb3:
                         // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
                         fragmentTransaction.show(collBlankFragment).hide(homeBlankFragment).commit();
                         break;
 
 
-                        case R.id.rb4:
+                    case R.id.rb4:
                         // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
                         fragmentTransaction.show(collBlankFragment).hide(homeBlankFragment).commit();
                         break;
 
 
-                        case R.id.rb5:
+                    case R.id.rb5:
                         // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
                         fragmentTransaction.show(collBlankFragment).hide(homeBlankFragment).commit();
                         break;
                 }
             }
         });
+    }
+
+
+
+    @Override
+    protected Presenter add() {
+        return new Presenter();
+    }
+
+    @Override
+    public void OnSuucess(Object o) {
+        
+    }
+
+    @Override
+    public void OnErro(String err) {
+
     }
 }
