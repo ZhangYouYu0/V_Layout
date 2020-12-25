@@ -1,6 +1,7 @@
 package com.example.viewpager.ImMode;
 
 import com.example.mylibrary.Utils.Net.CallBack;
+import com.example.mylibrary.Utils.Net.RetrofitUils;
 import com.example.viewpager.Contract.C;
 
 public class Model implements C.Mode{
@@ -12,6 +13,6 @@ public class Model implements C.Mode{
 
     @Override
     public <I> void Inface(String url, CallBack<I> callBack) {
-
+         RetrofitUils.getRetrofitUils().Inface(url,callBack);
     }
 }

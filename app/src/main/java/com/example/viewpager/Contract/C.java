@@ -3,6 +3,7 @@ package com.example.viewpager.Contract;
 import com.example.mylibrary.Base.BaseMode;
 import com.example.mylibrary.Base.BaseView;
 import com.example.mylibrary.Utils.Net.CallBack;
+import com.example.viewpager.FooBean.FooHomeBean;
 
 public abstract class C {
 
@@ -12,11 +13,12 @@ public abstract class C {
     }
 
     public interface Presenter {
-        void P();
+        void P1();
+        void P2();
     }
 
-    public interface View<I> extends BaseView{
-        void OnSuucess(I i);
+    public interface View extends BaseView{
+        void OnSuucess(FooHomeBean i);
         void OnErro(String err);
     }
 }

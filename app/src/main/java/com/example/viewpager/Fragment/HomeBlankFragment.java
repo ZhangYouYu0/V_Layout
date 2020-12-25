@@ -3,11 +3,21 @@ package com.example.viewpager.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.alibaba.android.vlayout.DelegateAdapter;
+import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
+import com.example.mylibrary.Base.BaseFragment;
+import com.example.mylibrary.Base.BasePresenter;
+import com.example.viewpager.Adapter.MainSingleAdapter;
+import com.example.viewpager.Contract.C;
+import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.ImPresenter.Presenter;
 import com.example.viewpager.R;
 
 /**
@@ -15,7 +25,7 @@ import com.example.viewpager.R;
  * Use the {@link HomeBlankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeBlankFragment extends Fragment {
+public class HomeBlankFragment extends BaseFragment implements C.View {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +35,7 @@ public class HomeBlankFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerview;
 
     public HomeBlankFragment() {
         // Required empty public constructor
@@ -57,10 +68,57 @@ public class HomeBlankFragment extends Fragment {
         }
     }
 
+
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home_blank, container, false);
+    public int ID() {
+        return R.layout.fragment_home_blank;
+    }
+
+    @Override
+    protected void initView(View view) {
+        recyclerview = view.findViewById(R.id.recyclerview);
+        VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(getActivity());
+        RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
+        recyclerview.setRecycledViewPool(recycledViewPool);
+
+        recycledViewPool.setMaxRecycledViews(0,10);
+
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        MainSingleAdapter mainSingleAdapter = new MainSingleAdapter(singleLayoutHelper,getActivity());
+
+
+        SingleLayoutHelper singleLayoutHelper1 = new SingleLayoutHelper();
+        MainSingleAdapter mainSingleAdapter1 = new MainSingleAdapter(singleLayoutHelper1,getActivity());
+
+
+        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
+        delegateAdapter.addAdapter(mainSingleAdapter);
+        delegateAdapter.addAdapter(mainSingleAdapter1);
+        recyclerview.setLayoutManager(virtualLayoutManager);
+        recyclerview.setAdapter(delegateAdapter);
+
+
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    public BasePresenter add() {
+        return new Presenter();
+    }
+
+    @Override
+    public void OnSuucess(FooHomeBean o) {
+
+    }
+
+    @Override
+    public void OnErro(String err) {
+
     }
 }

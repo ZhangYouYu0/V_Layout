@@ -20,6 +20,11 @@ public abstract class BaseActivity<p extends BasePresenter> extends AppCompatAct
         initData();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.destroy();
+    }
 
     protected abstract int ID();
     protected abstract void initData();
