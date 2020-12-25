@@ -7,14 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.Adapter.MainSingleAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter1;
+import com.example.viewpager.Adapter.MainGridAdapter;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.P.ImPresenter;
@@ -41,6 +42,9 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private RecyclerView recyclerview;
     private ArrayList<FooHomeBean.DataDTO.BannerDTO> bannerDTOS;
     private MainSingleAdapter1 mainSingleAdapter1;
+    private ArrayList<FooHomeBean.DataDTO.ChannelDTO> channelDTOS;
+    private MainGridAdapter mainGridAdapter;
+    private ArrayList<FooHomeBean.DataDTO.BrandListDTO> brandListDTOS;
 
     public HomeBlankFragment() {
         // Required empty public constructor
@@ -97,9 +101,20 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         mainSingleAdapter1 = new MainSingleAdapter1(singleLayoutHelper1,getActivity(),bannerDTOS);
 
 
+        channelDTOS = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(5);
+        gridLayoutHelper.setSpanCount(5);
+        mainGridAdapter = new MainGridAdapter(gridLayoutHelper, getActivity(), channelDTOS);
+
+        brandListDTOS = new ArrayList<>();
+        SingleLayoutHelper singleLayoutHelper2 = new SingleLayoutHelper();
+        MainSingleAdapte2r mainSingleAdapte2r = new MainSingleAdapte2r(singleLayoutHelper2,getActivity(),brandListDTOS);
+
+
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainSingleAdapter);
         delegateAdapter.addAdapter(mainSingleAdapter1);
+        delegateAdapter.addAdapter(mainGridAdapter);
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
 
@@ -120,6 +135,10 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         List<FooHomeBean.DataDTO.BannerDTO> banner = i.getData().getBanner();
         bannerDTOS.addAll(banner);
         mainSingleAdapter1.notifyDataSetChanged();
+
+        List<FooHomeBean.DataDTO.ChannelDTO> channel = i.getData().getChannel();
+        channelDTOS.addAll(channel);
+        mainGridAdapter.notifyDataSetChanged();
     }
 
     @Override
