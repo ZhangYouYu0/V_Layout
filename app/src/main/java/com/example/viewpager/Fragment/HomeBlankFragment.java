@@ -3,6 +3,7 @@ package com.example.viewpager.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -13,6 +14,8 @@ import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.mylibrary.Base.BaseFragment;
+import com.example.viewpager.Adapter.MainGridAdapter1;
+import com.example.viewpager.Adapter.MainSingleAdapte2r;
 import com.example.viewpager.Adapter.MainSingleAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter1;
 import com.example.viewpager.Adapter.MainGridAdapter;
@@ -44,7 +47,9 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private MainSingleAdapter1 mainSingleAdapter1;
     private ArrayList<FooHomeBean.DataDTO.ChannelDTO> channelDTOS;
     private MainGridAdapter mainGridAdapter;
+    private MainSingleAdapte2r mainSingleAdapte2r;
     private ArrayList<FooHomeBean.DataDTO.BrandListDTO> brandListDTOS;
+    private MainGridAdapter1 mainGridAdapter1;
 
     public HomeBlankFragment() {
         // Required empty public constructor
@@ -106,15 +111,20 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         gridLayoutHelper.setSpanCount(5);
         mainGridAdapter = new MainGridAdapter(gridLayoutHelper, getActivity(), channelDTOS);
 
-        brandListDTOS = new ArrayList<>();
         SingleLayoutHelper singleLayoutHelper2 = new SingleLayoutHelper();
-        MainSingleAdapte2r mainSingleAdapte2r = new MainSingleAdapte2r(singleLayoutHelper2,getActivity(),brandListDTOS);
+        mainSingleAdapte2r = new MainSingleAdapte2r(singleLayoutHelper2,getActivity());
+
+        brandListDTOS = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper1 = new GridLayoutHelper(2);
+        mainGridAdapter1 = new MainGridAdapter1(gridLayoutHelper1, getActivity(),brandListDTOS);
 
 
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainSingleAdapter);
         delegateAdapter.addAdapter(mainSingleAdapter1);
         delegateAdapter.addAdapter(mainGridAdapter);
+        delegateAdapter.addAdapter(mainSingleAdapte2r);
+        delegateAdapter.addAdapter(mainGridAdapter1);
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
 
@@ -139,6 +149,11 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         List<FooHomeBean.DataDTO.ChannelDTO> channel = i.getData().getChannel();
         channelDTOS.addAll(channel);
         mainGridAdapter.notifyDataSetChanged();
+
+
+        List<FooHomeBean.DataDTO.BrandListDTO> brandList = i.getData().getBrandList();
+        brandListDTOS.addAll(brandList);
+        mainGridAdapter1.notifyDataSetChanged();
     }
 
     @Override
