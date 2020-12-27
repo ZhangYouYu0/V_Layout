@@ -17,6 +17,8 @@ import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.Adapter.MainGridAdapter1;
 import com.example.viewpager.Adapter.MainGridAdapter2;
+import com.example.viewpager.Adapter.MainGridAdapter3;
+import com.example.viewpager.Adapter.MainGridAdapter4;
 import com.example.viewpager.Adapter.MainLineranAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter2;
 import com.example.viewpager.Adapter.MainSingleAdapter;
@@ -25,6 +27,8 @@ import com.example.viewpager.Adapter.MainGridAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter3;
 import com.example.viewpager.Adapter.MainSingleAdapter4;
 import com.example.viewpager.Adapter.MainSingleAdapter5;
+import com.example.viewpager.Adapter.MainSingleAdapter6;
+import com.example.viewpager.Adapter.MainSingleAdapter7;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.P.ImPresenter;
@@ -62,6 +66,12 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private MainSingleAdapter4 mainSingleAdapter4;
     private MainLineranAdapter mainGridAdapter3;
     private ArrayList<FooHomeBean.DataDTO.HotGoodsListDTO> hotGoodsListDTOS;
+    private ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsListDTOS;
+    private MainGridAdapter3 mainGridAdapter31;
+    private ArrayList<FooHomeBean.DataDTO.CategoryListDTO> singGoods;
+    private MainSingleAdapter7 mainSingleAdapter7;
+    private ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsListDTOS1;
+    private MainGridAdapter4 mainGridAdapter4;
 
     public HomeBlankFragment() {
         // Required empty public constructor
@@ -147,7 +157,23 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         SingleLayoutHelper singleLayoutHelper5 = new SingleLayoutHelper();
         MainSingleAdapter5 mainSingleAdapter5 = new MainSingleAdapter5(singleLayoutHelper5,getActivity());
 
-        
+        SingleLayoutHelper singleLayoutHelper6 = new SingleLayoutHelper();
+        MainSingleAdapter6 mainSingleAdapter6 = new MainSingleAdapter6(singleLayoutHelper6,getActivity());
+
+
+        GridLayoutHelper gridLayoutHelper3 = new GridLayoutHelper(2);
+        goodsListDTOS = new ArrayList<>();
+        mainGridAdapter31 = new MainGridAdapter3(gridLayoutHelper3,goodsListDTOS,getActivity());
+
+
+        singGoods = new ArrayList<>();
+        SingleLayoutHelper singleLayoutHelper7 = new SingleLayoutHelper();
+        mainSingleAdapter7 = new MainSingleAdapter7(singleLayoutHelper, singGoods, getActivity());
+
+        goodsListDTOS1 = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper4 = new GridLayoutHelper(2);
+        mainGridAdapter4 = new MainGridAdapter4(gridLayoutHelper4,goodsListDTOS1,getActivity());
+
 
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainSingleAdapter);
@@ -158,8 +184,12 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         delegateAdapter.addAdapter(mainSingleAdapter3);
         delegateAdapter.addAdapter(mainGridAdapter2);
         delegateAdapter.addAdapter(mainSingleAdapter4);
-        delegateAdapter.addAdapter(mainGridAdapter3);
+        delegateAdapter.addAdapter(this.mainGridAdapter3);
         delegateAdapter.addAdapter(mainSingleAdapter5);
+        delegateAdapter.addAdapter(mainSingleAdapter6);
+        delegateAdapter.addAdapter(mainGridAdapter31);
+        delegateAdapter.addAdapter(mainSingleAdapter7);
+        delegateAdapter.addAdapter(mainGridAdapter4);
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
 
@@ -198,7 +228,20 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         hotGoodsListDTOS.addAll(hotGoodsList);
         mainGridAdapter3.notifyDataSetChanged();
 
-            }
+
+        List<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = i.getData().getCategoryList().get(0).getGoodsList();
+        goodsListDTOS.addAll(goodsList);
+        mainGridAdapter31.notifyDataSetChanged();
+
+        List<FooHomeBean.DataDTO.CategoryListDTO> categoryList = (List<FooHomeBean.DataDTO.CategoryListDTO>) i.getData().getCategoryList();
+        FooHomeBean.DataDTO.CategoryListDTO categoryListDTO = categoryList.get(1);
+        singGoods.add(categoryListDTO);
+        mainSingleAdapter7.notifyDataSetChanged();
+
+        List<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList1 = i.getData().getCategoryList().get(1).getGoodsList();
+        goodsListDTOS1.addAll(goodsList1);
+        mainGridAdapter4.notifyDataSetChanged();
+    }
 
     @Override
     public void OnErro(String err) {
