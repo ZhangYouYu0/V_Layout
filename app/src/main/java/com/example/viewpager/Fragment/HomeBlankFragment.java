@@ -24,6 +24,7 @@ import com.example.viewpager.Adapter.MainSingleAdapter1;
 import com.example.viewpager.Adapter.MainGridAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter3;
 import com.example.viewpager.Adapter.MainSingleAdapter4;
+import com.example.viewpager.Adapter.MainSingleAdapter5;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.P.ImPresenter;
@@ -143,8 +144,11 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
         mainGridAdapter3 = new MainLineranAdapter(linearLayoutHelper,getActivity(),hotGoodsListDTOS);
 
+        SingleLayoutHelper singleLayoutHelper5 = new SingleLayoutHelper();
+        MainSingleAdapter5 mainSingleAdapter5 = new MainSingleAdapter5(singleLayoutHelper5,getActivity());
 
         
+
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainSingleAdapter);
         delegateAdapter.addAdapter(mainSingleAdapter1);
@@ -155,6 +159,7 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         delegateAdapter.addAdapter(mainGridAdapter2);
         delegateAdapter.addAdapter(mainSingleAdapter4);
         delegateAdapter.addAdapter(mainGridAdapter3);
+        delegateAdapter.addAdapter(mainSingleAdapter5);
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
 
