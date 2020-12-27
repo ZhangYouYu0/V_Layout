@@ -22,6 +22,7 @@ import com.example.viewpager.Adapter.MainGridAdapter4;
 import com.example.viewpager.Adapter.MainGridAdapter5;
 import com.example.viewpager.Adapter.MainGridAdapter6;
 import com.example.viewpager.Adapter.MainGridAdapter7;
+import com.example.viewpager.Adapter.MainGridAdapter8;
 import com.example.viewpager.Adapter.MainLineranAdapter;
 import com.example.viewpager.Adapter.MainSingleAdapter10;
 import com.example.viewpager.Adapter.MainSingleAdapter11;
@@ -93,6 +94,8 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private MainGridAdapter7 mainGridAdapter7;
     private ArrayList<FooHomeBean.DataDTO.CategoryListDTO> categoryListDTOS3;
     private MainSingleAdapter11 mainSingleAdapter11;
+    private MainGridAdapter8 mainGridAdapter8;
+    private ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsListDTOS5;
 
     public HomeBlankFragment() {
         // Required empty public constructor
@@ -224,6 +227,10 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         SingleLayoutHelper singleLayoutHelper11 = new SingleLayoutHelper();
         mainSingleAdapter11 = new MainSingleAdapter11(singleLayoutHelper11,categoryListDTOS3,getActivity());
 
+        goodsListDTOS5 = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper8 = new GridLayoutHelper(2);
+        mainGridAdapter8 = new MainGridAdapter8(gridLayoutHelper8,goodsListDTOS5,getActivity());
+
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainSingleAdapter);
         delegateAdapter.addAdapter(mainSingleAdapter1);
@@ -246,6 +253,7 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         delegateAdapter.addAdapter(mainSingleAdapter10);
         delegateAdapter.addAdapter(mainGridAdapter7);
         delegateAdapter.addAdapter(mainSingleAdapter11);
+        delegateAdapter.addAdapter(mainGridAdapter8);
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
 
@@ -326,6 +334,10 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         FooHomeBean.DataDTO.CategoryListDTO categoryListDTO4 = i.getData().getCategoryList().get(5);
         categoryListDTOS3.add(categoryListDTO4);
         mainSingleAdapter11.notifyDataSetChanged();
+
+        List<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList5 = i.getData().getCategoryList().get(5).getGoodsList();
+        goodsListDTOS5.addAll(goodsList5);
+        mainGridAdapter8.notifyDataSetChanged();
     }
 
     @Override
