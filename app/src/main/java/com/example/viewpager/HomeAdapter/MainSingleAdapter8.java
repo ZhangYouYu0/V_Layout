@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -17,16 +17,16 @@ import com.example.viewpager.R;
 
 import java.util.ArrayList;
 
-public class MainSingleAdapter11 extends DelegateAdapter.Adapter {
+public class MainSingleAdapter8 extends DelegateAdapter.Adapter {
     SingleLayoutHelper singleLayoutHelper;
     ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list;
     Context context;
-
-    public MainSingleAdapter11(SingleLayoutHelper singleLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list, Context context) {
+    public MainSingleAdapter8(SingleLayoutHelper singleLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list, Context context) {
         this.singleLayoutHelper = singleLayoutHelper;
         this.list = list;
         this.context = context;
     }
+
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
@@ -56,7 +56,7 @@ public class MainSingleAdapter11 extends DelegateAdapter.Adapter {
         TextView textView;
         public SingViewHolder(View root) {
             super(root);
-            textView =root.findViewById(R.id.tv_title1);
+            textView=root.findViewById(R.id.tv_title1);
         }
     }
 }

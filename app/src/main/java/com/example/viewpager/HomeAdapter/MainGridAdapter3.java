@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,12 +19,12 @@ import com.example.viewpager.R;
 
 import java.util.ArrayList;
 
-public class MainGridAdapter7 extends DelegateAdapter.Adapter {
+public class MainGridAdapter3 extends DelegateAdapter.Adapter {
     GridLayoutHelper gridLayoutHelper;
     ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list;
     Context context;
 
-    public MainGridAdapter7(GridLayoutHelper gridLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list, Context context) {
+    public MainGridAdapter3(GridLayoutHelper gridLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list, Context context) {
         this.gridLayoutHelper = gridLayoutHelper;
         this.list = list;
         this.context = context;
@@ -38,17 +38,17 @@ public class MainGridAdapter7 extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(context).inflate(R.layout.sl2_item, parent, false);
-        return new GridViewHolder(root);
+        View inflate = LayoutInflater.from(context).inflate(R.layout.gr2_item, parent, false);
+        return new GirdViewHolder(inflate);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        GridViewHolder gridViewHolder = (GridViewHolder) holder;
+        GirdViewHolder girdViewHolder = (GirdViewHolder) holder;
         FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO goodsListDTO = list.get(position);
-        gridViewHolder.textView.setText(goodsListDTO.getName());
-        gridViewHolder.textView1.setText("￥"+goodsListDTO.getRetail_price());
-        Glide.with(context).load(goodsListDTO.getList_pic_url()).into(gridViewHolder.imageView);
+        girdViewHolder.textView.setText(goodsListDTO.getName());
+        girdViewHolder.textView1.setText("￥"+goodsListDTO.getRetail_price());
+        Glide.with(context).load(goodsListDTO.getList_pic_url()).into(girdViewHolder.imageView);
     }
 
     @Override
@@ -56,15 +56,15 @@ public class MainGridAdapter7 extends DelegateAdapter.Adapter {
         return list.size();
     }
 
-    private class GridViewHolder extends RecyclerView.ViewHolder {
-        ImageView imageView;
+    private class GirdViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         TextView textView1;
-        public GridViewHolder(View root) {
-            super(root);
-            imageView=root.findViewById(R.id.image_view00);
-            textView=root.findViewById(R.id.tv_name_text00);
-            textView1=root.findViewById(R.id.tv_name_text000);
+        ImageView imageView;
+        public GirdViewHolder(View inflate) {
+            super(inflate);
+            imageView=inflate.findViewById(R.id.image_view2);
+            textView =inflate.findViewById(R.id.tv_name_text2);
+            textView1 =inflate.findViewById(R.id.tv_name_text3);
         }
     }
 }

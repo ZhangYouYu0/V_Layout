@@ -1,21 +1,45 @@
 package com.example.viewpager.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ScrollView;
+import android.widget.Toast;
 
+import com.alibaba.android.vlayout.DelegateAdapter;
+import com.alibaba.android.vlayout.VirtualLayoutManager;
+import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.example.mylibrary.Base.BaseFragment;
+import com.example.viewpager.CollAdaoter.MainLinearAdapter1;
+import com.example.viewpager.Contract.C;
+import com.example.viewpager.FooBean.Bean;
+import com.example.viewpager.FooBean.FooCollBean;
+import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.Login.View.LoginMainActivity;
+import com.example.viewpager.MainActivity;
+import com.example.viewpager.P.ImPresenter;
 import com.example.viewpager.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CollBlankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class CollBlankFragment extends Fragment {
+public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.View {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,6 +49,15 @@ public class CollBlankFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private RecyclerView recyclerview;
+    private Button s;
+    private Button x;
+     int i=1;
+    private   ArrayList<Bean.DataBeanX.DataBean> list;
+    private LinearLayoutHelper linearSnapHelper;
+    private MainLinearAdapter1 mainLinearAdapter1;
+    private NestedScrollView n;
+    private Button z;
 
     public CollBlankFragment() {
         // Required empty public constructor
@@ -57,10 +90,103 @@ public class CollBlankFragment extends Fragment {
         }
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_coll_blank, container, false);
+    public int ID() {
+        return R.layout.fragment_coll_blank;
+    }
+
+    @Override
+    protected void initView(View view) {
+        recyclerview = view.findViewById(R.id.VP_recycler);
+        s = view.findViewById(R.id.bnt_S);
+        x = view.findViewById(R.id.bnt_X);
+        n = view.findViewById(R.id.N_view);
+        z = view.findViewById(R.id.bnt_Z);
+        VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(getActivity());
+        RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
+        recyclerview.setRecycledViewPool(recycledViewPool);
+
+
+        z.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), MainActivity.class));
+            }
+        });
+
+        s.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    i--;
+                    if(i<0){
+                        Toast.makeText(getContext(), "前面没有数据了噢", Toast.LENGTH_SHORT).show();
+                    }else{
+                        list.clear();
+                        presenter.P2(i);
+                    }
+                s.setEnabled(false);
+              //  n.fullScroll(ScrollView.FOCUS_UP);
+            }
+        });
+
+     x.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+                 i++;
+                 if(i>2){
+                     Toast.makeText(getContext(), "后面没有数据了噢", Toast.LENGTH_SHORT).show();
+                 }else{
+                     list.clear();
+                     presenter.P2(i);
+                 }
+            x.setEnabled(false);
+           //  n.fullScroll(ScrollView.FOCUS_UP);
+         }
+     });
+
+        list = new ArrayList<>();
+        linearSnapHelper = new LinearLayoutHelper();
+//        LinearLayoutHelper
+        mainLinearAdapter1 = new MainLinearAdapter1(getActivity(),list,linearSnapHelper);
+
+
+        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
+        delegateAdapter.addAdapter(mainLinearAdapter1);
+
+
+        recyclerview.setLayoutManager(virtualLayoutManager);
+        recyclerview.setAdapter(delegateAdapter);
+
+    }
+
+    @Override
+    protected void initData() {
+        presenter.P2(i);
+    }
+
+    @Override
+    public ImPresenter add() {
+        return new ImPresenter();
+    }
+
+    @Override
+    public void OnSuucessHome(FooHomeBean i) {
+
+    }
+
+    @Override
+    public void OnSuucessColl(Bean i) {
+        List<Bean.DataBeanX.DataBean> data = i.getData().getData();
+        list.addAll(data);
+        Toast.makeText(getActivity(),data.get(1).getPrice_info()+"", Toast.LENGTH_SHORT).show();
+        mainLinearAdapter1.notifyDataSetChanged();
+      //  n.fullScroll(ScrollView.FOCUS_UP);
+
+    }
+
+    @Override
+    public void OnErro(String err) {
+        Log.e("TAG", "OnErro: "+err );
     }
 }

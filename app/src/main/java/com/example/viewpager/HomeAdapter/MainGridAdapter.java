@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.DelegateAdapter.Adapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.bumptech.glide.Glide;
@@ -20,36 +19,36 @@ import com.example.viewpager.R;
 
 import java.util.ArrayList;
 
-public class MainGridAdapter6 extends Adapter {
-    GridLayoutHelper gridLayoutHelper;
-    ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list;
+public class MainGridAdapter extends DelegateAdapter.Adapter {
+    GridLayoutHelper singleLayoutHelper;
     Context context;
+    ArrayList<FooHomeBean.DataDTO.ChannelDTO> list;
 
-    public MainGridAdapter6(GridLayoutHelper gridLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list, Context context) {
-        this.gridLayoutHelper = gridLayoutHelper;
-        this.list = list;
+    public MainGridAdapter(GridLayoutHelper singleLayoutHelper, Context context, ArrayList<FooHomeBean.DataDTO.ChannelDTO> list) {
+        this.singleLayoutHelper = singleLayoutHelper;
         this.context = context;
+        this.list = list;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return gridLayoutHelper;
+
+        return singleLayoutHelper;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(context).inflate(R.layout.sl2_item, parent, false);
+        View root = LayoutInflater.from(context).inflate(R.layout.grid_item, parent, false);
         return new GridViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-    GridViewHolder gridViewHolder = (GridViewHolder) holder;
-        FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO goodsListDTO = list.get(position);
-        gridViewHolder.textView.setText(goodsListDTO.getName());
-        gridViewHolder.textView1.setText("￥"+goodsListDTO.getRetail_price());
-        Glide.with(context).load(goodsListDTO.getList_pic_url()).into(gridViewHolder.imageView);
+        FooHomeBean.DataDTO.ChannelDTO channelDTO = list.get(position);
+        GridViewHolder gridLayoutHelper = (GridViewHolder) holder;
+        Glide.with(context).load(channelDTO.getIcon_url()).into(gridLayoutHelper.imageView);
+        gridLayoutHelper.textView.setText(channelDTO.getName());
     }
 
     @Override
@@ -60,12 +59,10 @@ public class MainGridAdapter6 extends Adapter {
     private class GridViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
         TextView textView;
-        TextView textView1;
         public GridViewHolder(View root) {
             super(root);
-            imageView=root.findViewById(R.id.image_view00);
-            textView=root.findViewById(R.id.tv_name_text00);
-            textView1=root.findViewById(R.id.tv_name_text000);
+            imageView=root.findViewById(R.id.image1);
+            textView=root.findViewById(R.id.tv_name);
         }
     }
 }

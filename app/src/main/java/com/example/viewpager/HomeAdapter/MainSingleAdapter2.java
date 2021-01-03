@@ -1,43 +1,44 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
-import com.alibaba.android.vlayout.layout.FloatLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.viewpager.R;
 
-public class MainSingleAdapter extends DelegateAdapter.Adapter {
-    SingleLayoutHelper floatLayoutHelper;
+public class MainSingleAdapter2 extends DelegateAdapter.Adapter {
+    SingleLayoutHelper singleLayoutHelper;
     Context context;
 
-    public MainSingleAdapter(SingleLayoutHelper floatLayoutHelper, Context context) {
-        this.floatLayoutHelper = floatLayoutHelper;
+    public MainSingleAdapter2(SingleLayoutHelper singleLayoutHelper, Context context) {
+        this.singleLayoutHelper = singleLayoutHelper;
         this.context = context;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return floatLayoutHelper;
+        return singleLayoutHelper;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(context).inflate(R.layout.ed_item, parent, false);
-        return new ImViewHolder(inflate);
+        View root = LayoutInflater.from(context).inflate(R.layout.sl_item, parent, false);
+        return new SingViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
+        SingViewHolder singViewHolder = (SingViewHolder) holder;
+        singViewHolder.textView.setText("品牌制造商直供");
     }
 
     @Override
@@ -45,9 +46,11 @@ public class MainSingleAdapter extends DelegateAdapter.Adapter {
         return 1;
     }
 
-    private class ImViewHolder extends RecyclerView.ViewHolder {
-        public ImViewHolder(View inflate) {
-            super(inflate);
+    private class SingViewHolder extends RecyclerView.ViewHolder {
+        TextView textView;
+        public SingViewHolder(View root) {
+            super(root);
+            textView=root.findViewById(R.id.tv_title);
         }
     }
 }

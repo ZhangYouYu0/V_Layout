@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,51 +12,45 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
-import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.R;
 
-import java.util.ArrayList;
-
-public class MainSingleAdapter10 extends DelegateAdapter.Adapter {
-    SingleLayoutHelper singleLayoutHelper;
-    ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list;
+public class  MainSingleAdapter3 extends DelegateAdapter.Adapter {
+    SingleLayoutHelper singleLayoutHelpe;
     Context context;
 
-    public MainSingleAdapter10(SingleLayoutHelper singleLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list, Context context) {
-        this.singleLayoutHelper = singleLayoutHelper;
-        this.list = list;
+    public MainSingleAdapter3(SingleLayoutHelper singleLayoutHelpe, Context context) {
+        this.singleLayoutHelpe = singleLayoutHelpe;
         this.context = context;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return singleLayoutHelper;
+        return singleLayoutHelpe;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View root = LayoutInflater.from(context).inflate(R.layout.sl1_item, parent, false);
-        return new GridViewHolder(root);
+        return new ImViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        GridViewHolder gridViewHolder = (GridViewHolder) holder;
-        FooHomeBean.DataDTO.CategoryListDTO categoryListDTO = list.get(position);
-        gridViewHolder.textView.setText(categoryListDTO.getName());
+        ImViewHolder imViewHolder = (ImViewHolder) holder;
+        imViewHolder.textView.setText("周一周四,新品首发");
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return 1;
     }
 
-    private class GridViewHolder extends RecyclerView.ViewHolder {
+    private class ImViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
-        public GridViewHolder(View root) {
+        public ImViewHolder(View root) {
             super(root);
-            textView =root.findViewById(R.id.tv_title1);
+            textView=root.findViewById(R.id.tv_title1);
         }
     }
 }

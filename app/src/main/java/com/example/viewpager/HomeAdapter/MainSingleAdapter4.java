@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,19 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
-import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.R;
 
-import java.util.ArrayList;
-
-public class MainSingleAdapter7 extends DelegateAdapter.Adapter {
+public class MainSingleAdapter4 extends DelegateAdapter.Adapter {
     SingleLayoutHelper singleLayoutHelper;
-    ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list;
     Context context;
 
-    public MainSingleAdapter7(SingleLayoutHelper singleLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list, Context context) {
+    public MainSingleAdapter4(SingleLayoutHelper singleLayoutHelper, Context context) {
         this.singleLayoutHelper = singleLayoutHelper;
-        this.list = list;
         this.context = context;
     }
 
@@ -36,28 +31,26 @@ public class MainSingleAdapter7 extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         View root = LayoutInflater.from(context).inflate(R.layout.sl1_item, parent, false);
-        return new SingViewHolder(root);
+        return new ImViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FooHomeBean.DataDTO.CategoryListDTO goodsListDTO = list.get(position);
-        SingViewHolder singViewHolder = (SingViewHolder) holder;
-        singViewHolder.textView.setText(goodsListDTO.getName());
+        ImViewHolder imViewHolder = (ImViewHolder) holder;
+        imViewHolder.textView.setText("人气推荐");
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
+        return 1;
     }
 
-    private class SingViewHolder extends RecyclerView.ViewHolder {
+    private class ImViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
-        public SingViewHolder(View root) {
+        public ImViewHolder(View root) {
             super(root);
-            textView =root.findViewById(R.id.tv_title1);
+            textView=root.findViewById(R.id.tv_title1);
         }
     }
 }

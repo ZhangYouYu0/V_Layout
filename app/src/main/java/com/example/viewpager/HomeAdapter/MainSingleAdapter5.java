@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,18 +12,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
-import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.R;
 
-import java.util.ArrayList;
-
-public class MainSingleAdapter2 extends DelegateAdapter.Adapter {
+public class MainSingleAdapter5 extends DelegateAdapter.Adapter {
     SingleLayoutHelper singleLayoutHelper;
     Context context;
 
-    public MainSingleAdapter2(SingleLayoutHelper singleLayoutHelper, Context context) {
+    public MainSingleAdapter5(SingleLayoutHelper singleLayoutHelper, Context context) {
         this.singleLayoutHelper = singleLayoutHelper;
         this.context = context;
+    }
+
+    public MainSingleAdapter5() {
+
     }
 
     @Override
@@ -34,14 +35,14 @@ public class MainSingleAdapter2 extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(context).inflate(R.layout.sl_item, parent, false);
+        View root = LayoutInflater.from(context).inflate(R.layout.sl1_item, parent, false);
         return new SingViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         SingViewHolder singViewHolder = (SingViewHolder) holder;
-        singViewHolder.textView.setText("品牌制造商直供");
+        singViewHolder.textView.setText("专题精选");
     }
 
     @Override
@@ -53,7 +54,7 @@ public class MainSingleAdapter2 extends DelegateAdapter.Adapter {
         TextView textView;
         public SingViewHolder(View root) {
             super(root);
-            textView=root.findViewById(R.id.tv_title);
+            textView=root.findViewById(R.id.tv_title1);
         }
     }
 }

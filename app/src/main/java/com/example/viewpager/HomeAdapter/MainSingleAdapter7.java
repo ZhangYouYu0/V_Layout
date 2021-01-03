@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,19 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
+import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.R;
 
-public class MainSingleAdapter5 extends DelegateAdapter.Adapter {
+import java.util.ArrayList;
+
+public class MainSingleAdapter7 extends DelegateAdapter.Adapter {
     SingleLayoutHelper singleLayoutHelper;
+    ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list;
     Context context;
 
-    public MainSingleAdapter5(SingleLayoutHelper singleLayoutHelper, Context context) {
+    public MainSingleAdapter7(SingleLayoutHelper singleLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO> list, Context context) {
         this.singleLayoutHelper = singleLayoutHelper;
+        this.list = list;
         this.context = context;
-    }
-
-    public MainSingleAdapter5() {
-
     }
 
     @Override
@@ -35,26 +36,28 @@ public class MainSingleAdapter5 extends DelegateAdapter.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+
         View root = LayoutInflater.from(context).inflate(R.layout.sl1_item, parent, false);
         return new SingViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
+        FooHomeBean.DataDTO.CategoryListDTO goodsListDTO = list.get(position);
         SingViewHolder singViewHolder = (SingViewHolder) holder;
-        singViewHolder.textView.setText("专题精选");
+        singViewHolder.textView.setText(goodsListDTO.getName());
     }
 
     @Override
     public int getItemCount() {
-        return 1;
+        return list.size();
     }
 
     private class SingViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         public SingViewHolder(View root) {
             super(root);
-            textView=root.findViewById(R.id.tv_title1);
+            textView =root.findViewById(R.id.tv_title1);
         }
     }
 }

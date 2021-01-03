@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -19,12 +19,12 @@ import com.example.viewpager.R;
 
 import java.util.ArrayList;
 
-public class MainGridAdapter8 extends DelegateAdapter.Adapter {
+public class MainGridAdapter7 extends DelegateAdapter.Adapter {
     GridLayoutHelper gridLayoutHelper;
     ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list;
     Context context;
 
-    public MainGridAdapter8(GridLayoutHelper gridLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list, Context context) {
+    public MainGridAdapter7(GridLayoutHelper gridLayoutHelper, ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> list, Context context) {
         this.gridLayoutHelper = gridLayoutHelper;
         this.list = list;
         this.context = context;
@@ -44,8 +44,8 @@ public class MainGridAdapter8 extends DelegateAdapter.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO goodsListDTO = list.get(position);
         GridViewHolder gridViewHolder = (GridViewHolder) holder;
+        FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO goodsListDTO = list.get(position);
         gridViewHolder.textView.setText(goodsListDTO.getName());
         gridViewHolder.textView1.setText("￥"+goodsListDTO.getRetail_price());
         Glide.with(context).load(goodsListDTO.getList_pic_url()).into(gridViewHolder.imageView);

@@ -3,7 +3,6 @@ package com.example.viewpager.Fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -15,28 +14,30 @@ import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.mylibrary.Base.BaseFragment;
-import com.example.viewpager.Adapter.MainGridAdapter1;
-import com.example.viewpager.Adapter.MainGridAdapter2;
-import com.example.viewpager.Adapter.MainGridAdapter3;
-import com.example.viewpager.Adapter.MainGridAdapter4;
-import com.example.viewpager.Adapter.MainGridAdapter5;
-import com.example.viewpager.Adapter.MainGridAdapter6;
-import com.example.viewpager.Adapter.MainGridAdapter7;
-import com.example.viewpager.Adapter.MainGridAdapter8;
-import com.example.viewpager.Adapter.MainLineranAdapter;
-import com.example.viewpager.Adapter.MainSingleAdapter10;
-import com.example.viewpager.Adapter.MainSingleAdapter11;
-import com.example.viewpager.Adapter.MainSingleAdapter2;
-import com.example.viewpager.Adapter.MainSingleAdapter;
-import com.example.viewpager.Adapter.MainSingleAdapter1;
-import com.example.viewpager.Adapter.MainGridAdapter;
-import com.example.viewpager.Adapter.MainSingleAdapter3;
-import com.example.viewpager.Adapter.MainSingleAdapter4;
-import com.example.viewpager.Adapter.MainSingleAdapter5;
-import com.example.viewpager.Adapter.MainSingleAdapter6;
-import com.example.viewpager.Adapter.MainSingleAdapter7;
-import com.example.viewpager.Adapter.MainSingleAdapter8;
-import com.example.viewpager.Adapter.MainSingleAdapter9;
+import com.example.viewpager.FooBean.Bean;
+import com.example.viewpager.FooBean.FooCollBean;
+import com.example.viewpager.HomeAdapter.MainGridAdapter1;
+import com.example.viewpager.HomeAdapter.MainGridAdapter2;
+import com.example.viewpager.HomeAdapter.MainGridAdapter3;
+import com.example.viewpager.HomeAdapter.MainGridAdapter4;
+import com.example.viewpager.HomeAdapter.MainGridAdapter5;
+import com.example.viewpager.HomeAdapter.MainGridAdapter6;
+import com.example.viewpager.HomeAdapter.MainGridAdapter7;
+import com.example.viewpager.HomeAdapter.MainGridAdapter8;
+import com.example.viewpager.HomeAdapter.MainLineranAdapter;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter10;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter11;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter2;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter1;
+import com.example.viewpager.HomeAdapter.MainGridAdapter;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter3;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter4;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter5;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter6;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter7;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter8;
+import com.example.viewpager.HomeAdapter.MainSingleAdapter9;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.FooHomeBean;
 import com.example.viewpager.P.ImPresenter;
@@ -270,7 +271,7 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     }
 
     @Override
-    public void OnSuucess(FooHomeBean i) {
+    public void OnSuucessHome(FooHomeBean i) {
         List<FooHomeBean.DataDTO.BannerDTO> banner = i.getData().getBanner();
         bannerDTOS.addAll(banner);
         mainSingleAdapter1.notifyDataSetChanged();
@@ -339,6 +340,12 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         goodsListDTOS5.addAll(goodsList5);
         mainGridAdapter8.notifyDataSetChanged();
     }
+
+    @Override
+    public void OnSuucessColl(Bean i) {
+
+    }
+
 
     @Override
     public void OnErro(String err) {

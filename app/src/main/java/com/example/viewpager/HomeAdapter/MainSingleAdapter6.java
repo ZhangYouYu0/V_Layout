@@ -1,4 +1,4 @@
-package com.example.viewpager.Adapter;
+package com.example.viewpager.HomeAdapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,31 +14,31 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.viewpager.R;
 
-public class MainSingleAdapter3 extends DelegateAdapter.Adapter {
-    SingleLayoutHelper singleLayoutHelpe;
+public class MainSingleAdapter6 extends DelegateAdapter.Adapter {
+    SingleLayoutHelper singleLayoutHelper;
     Context context;
 
-    public MainSingleAdapter3(SingleLayoutHelper singleLayoutHelpe, Context context) {
-        this.singleLayoutHelpe = singleLayoutHelpe;
+    public MainSingleAdapter6(SingleLayoutHelper singleLayoutHelper, Context context) {
+        this.singleLayoutHelper = singleLayoutHelper;
         this.context = context;
     }
 
     @Override
     public LayoutHelper onCreateLayoutHelper() {
-        return singleLayoutHelpe;
+        return singleLayoutHelper;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View root = LayoutInflater.from(context).inflate(R.layout.sl1_item, parent, false);
-        return new ImViewHolder(root);
+        return new SingViewHolder(root);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ImViewHolder imViewHolder = (ImViewHolder) holder;
-        imViewHolder.textView.setText("周一周四,新品首发");
+        SingViewHolder singViewHolder = (SingViewHolder) holder;
+        singViewHolder.textView.setText("居家");
     }
 
     @Override
@@ -46,11 +46,11 @@ public class MainSingleAdapter3 extends DelegateAdapter.Adapter {
         return 1;
     }
 
-    private class ImViewHolder extends RecyclerView.ViewHolder {
+    private class SingViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
-        public ImViewHolder(View root) {
+        public SingViewHolder(View root) {
             super(root);
-            textView=root.findViewById(R.id.tv_title1);
+            textView =root.findViewById(R.id.tv_title1);
         }
     }
 }

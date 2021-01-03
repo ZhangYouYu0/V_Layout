@@ -18,4 +18,9 @@ public class ImMode implements C.Mode{
     public <I> void Next(String url, CallBack<I> callBack) {
         RetrofitUtils.getRetrofitUils().get(url,callBack);
     }
+
+    @Override
+    public <I> void Next1(int  id, CallBack<I> callBack) {
+        RetrofitUtils.getRetrofitUils().getColl(id,callBack);
+    }
 }
