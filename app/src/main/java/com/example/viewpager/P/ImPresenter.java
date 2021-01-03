@@ -33,6 +33,11 @@ public class ImPresenter  extends BasePresenter<C.View,C.Mode> implements C.Pres
 
             }
 
+            @Override
+            public void OnLogin(FooHomeBean fooHomeBean) {
+
+            }
+
         });
     }
 
@@ -53,7 +58,12 @@ public class ImPresenter  extends BasePresenter<C.View,C.Mode> implements C.Pres
          public void OnErroColl(Bean fooCollBean) {
              iview.OnSuucessColl(fooCollBean);
          }
-     });
+
+            @Override
+            public void OnLogin(Bean bean) {
+
+            }
+        });
     }
 
 

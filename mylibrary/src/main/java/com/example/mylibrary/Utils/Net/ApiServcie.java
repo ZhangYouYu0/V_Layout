@@ -2,6 +2,8 @@ package com.example.mylibrary.Utils.Net;
 
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
+import retrofit2.http.Field;
+import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -18,7 +20,11 @@ public interface ApiServcie {
     @GET("api/topic/list?&size=10")
     Observable<ResponseBody> get1(@Query("page") int page);
 
+//    https://cdplay.cn/
 
+    @FormUrlEncoded
+    @POST("api/auth/login?")
+    Observable<ResponseBody> getLogin(@Field("username") String username, @Field("password")String password);
 //    https://cdplay.cn/api/topic/list?page=1&size=10
 
 }

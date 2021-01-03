@@ -111,7 +111,7 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         z.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                startActivity(new Intent(getActivity(), LoginMainActivity.class));
             }
         });
 

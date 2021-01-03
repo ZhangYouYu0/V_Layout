@@ -6,4 +6,6 @@ public interface CallBack <I>{
     void OnSuucess(String err);
 
     void OnErroColl(I i);
+
+    void OnLogin(I i);
 }

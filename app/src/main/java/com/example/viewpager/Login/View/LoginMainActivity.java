@@ -1,8 +1,7 @@
 package com.example.viewpager.Login.View;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -10,17 +9,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mylibrary.Base.BaseActivity;
-import com.example.mylibrary.Base.BasePresenter;
+import com.example.viewpager.Login.Contract.C;
+import com.example.viewpager.Login.Prsenter.IPresneter;
 import com.example.viewpager.R;
 
-public class LoginMainActivity extends BaseActivity implements View.OnClickListener {
+import java.util.ArrayList;
+
+public class LoginMainActivity extends BaseActivity<IPresneter> implements View.OnClickListener , C.View {
 
     private EditText username;
     private EditText userpws;
     private CheckBox check;
     private Button bnt;
 
-
+    int anInt=0;
     @Override
     protected int ID() {
         return R.layout.activity_login_main;
@@ -44,19 +46,61 @@ public class LoginMainActivity extends BaseActivity implements View.OnClickListe
 
 
     @Override
-    protected BasePresenter add() {
-        return null;
+    protected IPresneter add() {
+        return new IPresneter();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.checked_login:
-                Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "1", Toast.LENGTH_SHORT).show();
+                anInt++;
+                if(anInt%2==0&&anInt!=0){
+                    anInt=0;
+                }else{
+                    anInt=5;
+                }
                 break;
             case R.id.bnt_login:
-                Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
+                String name = username.getText().toString();
+                String pws = userpws.getText().toString();
+                if(TextUtils.isEmpty(name)){
+                    Toast.makeText(this, "用户：不能输入内容为：NULL", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    if(TextUtils.isEmpty(pws)){
+                        Toast.makeText(this, "密码：不能输入内容为：NULL", Toast.LENGTH_SHORT).show();
+                    }else{
+
+                        if(anInt!=5){
+                            Toast.makeText(this, "请先勾选记住密码", Toast.LENGTH_SHORT).show();
+                        }else{
+                            ArrayList<String> list = new ArrayList<>();
+                            list.add(name);
+                            list.add(pws);
+                            presenter.P(list);
+                        }
+
+                    }
+
+                }
+             
+             //   Toast.makeText(this, "2", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
+
+    @Override
+    public void OnCg() {
+        Log.e("TAG", "OnCg: 登录成功" );
+        Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void OnFail(String err) {
+        Log.e("TAG", "OnCg: 登录失败"+err);
+        Toast.makeText(this, "登录失败"+err, Toast.LENGTH_SHORT).show();
+
     }
 }
