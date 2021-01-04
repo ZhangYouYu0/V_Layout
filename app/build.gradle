@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'//配合Rxjava 使用
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0'
     implementation 'com.tencent:mmkv-static:1.2.7'
+    implementation 'q.rorbin:VerticalTabLayout:1.2.5'
     implementation ('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
     }

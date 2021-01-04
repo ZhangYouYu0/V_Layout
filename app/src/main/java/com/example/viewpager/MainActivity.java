@@ -2,16 +2,27 @@ package com.example.viewpager;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
 import com.example.mylibrary.Base.BaseActivity;
+import com.example.viewpager.Fragment.ClassfiyBlankFragment;
 import com.example.viewpager.Fragment.CollBlankFragment;
 import com.example.viewpager.Fragment.HomeBlankFragment;
 import com.example.viewpager.Fragment.PageBlankFragment;
+import com.example.viewpager.Fragment.YouBlankFragment;
+import com.example.viewpager.Login.View.LoginMainActivity;
 import com.example.viewpager.P.ImPresenter;
 
 import java.net.CookieHandler;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity  extends BaseActivity {
 
@@ -19,7 +30,10 @@ public class MainActivity  extends BaseActivity {
     CollBlankFragment collBlankFragment;
     RadioGroup mrg;
     LinearLayout ll;
+
     private PageBlankFragment pageBlankFragment;
+    private ClassfiyBlankFragment classfiyBlankFragment;
+    private YouBlankFragment youBlankFragment;
 
     @Override
     protected int ID() {
@@ -31,13 +45,19 @@ public class MainActivity  extends BaseActivity {
         homeBlankFragment = new HomeBlankFragment();
         collBlankFragment = new CollBlankFragment();
         pageBlankFragment = new PageBlankFragment();
+        classfiyBlankFragment = new ClassfiyBlankFragment();
+        youBlankFragment = new YouBlankFragment();
         FragmentTransaction supportFragmentManager = getSupportFragmentManager().beginTransaction();
         supportFragmentManager.add(R.id.bnt_ll,homeBlankFragment)
                 .add(R.id.bnt_ll,collBlankFragment)
                 .add(R.id.bnt_ll,pageBlankFragment)
+                .add(R.id.bnt_ll,classfiyBlankFragment)
+                .add(R.id.bnt_ll,youBlankFragment)
                 .show(homeBlankFragment)
                 .hide(collBlankFragment)
                 .hide(pageBlankFragment)
+                .hide(youBlankFragment)
+                .hide(classfiyBlankFragment)
                 .commit();
     }
 
@@ -51,29 +71,33 @@ public class MainActivity  extends BaseActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (checkedId){
                     case R.id.rb1:
-                        fragmentTransaction.show(homeBlankFragment).hide(collBlankFragment).commit();
+                        fragmentTransaction.show(homeBlankFragment).hide(collBlankFragment).hide(classfiyBlankFragment).hide(youBlankFragment).hide(pageBlankFragment).commit();
                         // Toast.makeText(MainActivity.this, "1", Toast.LENGTH_SHORT).show();
                         break;
                     case R.id.rb2:
                         // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
-                        fragmentTransaction.show(collBlankFragment).hide(homeBlankFragment).commit();
+
+                        fragmentTransaction.show(collBlankFragment).hide(homeBlankFragment).hide(classfiyBlankFragment).hide(youBlankFragment).hide(pageBlankFragment).commit();
+
+
+
                         break;
 
                     case R.id.rb3:
                         // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
-                        fragmentTransaction.show(pageBlankFragment).hide(collBlankFragment).hide(homeBlankFragment).commit();
+                        fragmentTransaction.show(classfiyBlankFragment).hide(collBlankFragment).hide(pageBlankFragment).hide(homeBlankFragment).hide(youBlankFragment).commit();
                         break;
 
 
                     case R.id.rb4:
                         // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
-                        fragmentTransaction.show(pageBlankFragment).hide(collBlankFragment).hide(homeBlankFragment).commit();
+                        fragmentTransaction.show(pageBlankFragment).hide(collBlankFragment).hide(homeBlankFragment).hide(classfiyBlankFragment).hide(youBlankFragment).commit();
                         break;
 
 
                     case R.id.rb5:
-                        // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
-                        fragmentTransaction.show(pageBlankFragment).hide(collBlankFragment).hide(homeBlankFragment).commit();
+                        fragmentTransaction.show(youBlankFragment).hide(collBlankFragment).hide(homeBlankFragment).hide(classfiyBlankFragment).hide(youBlankFragment).commit();
+
                         break;
                 }
             }

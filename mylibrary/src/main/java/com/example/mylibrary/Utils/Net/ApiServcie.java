@@ -25,6 +25,14 @@ public interface ApiServcie {
     @FormUrlEncoded
     @POST("api/auth/login?")
     Observable<ResponseBody> getLogin(@Field("username") String username, @Field("password")String password);
+
+//    https://cdplay.cn/
+    @GET
+    Observable<ResponseBody> getTab(@Url String TabUrl);
+
+    @GET("api/catalog/current?")
+    Observable<ResponseBody> getClassfiy(@Query("id") int id);
+
 //    https://cdplay.cn/api/topic/list?page=1&size=10
 
 }

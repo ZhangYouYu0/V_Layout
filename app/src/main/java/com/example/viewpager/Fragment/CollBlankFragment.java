@@ -24,8 +24,10 @@ import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.CollAdaoter.MainLinearAdapter1;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.Bean;
+import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooCollBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooTablayoutBean;
 import com.example.viewpager.Login.View.LoginMainActivity;
 import com.example.viewpager.MainActivity;
 import com.example.viewpager.P.ImPresenter;
@@ -33,6 +35,13 @@ import com.example.viewpager.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -52,12 +61,14 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private RecyclerView recyclerview;
     private Button s;
     private Button x;
-     int i=1;
+    int i=1;
     private   ArrayList<Bean.DataBeanX.DataBean> list;
     private LinearLayoutHelper linearSnapHelper;
-    private MainLinearAdapter1 mainLinearAdapter1;
+
     private NestedScrollView n;
     private Button z;
+
+    private MainLinearAdapter1 mainLinearAdapter11;
 
     public CollBlankFragment() {
         // Required empty public constructor
@@ -98,6 +109,7 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
 
     @Override
     protected void initView(View view) {
+
         recyclerview = view.findViewById(R.id.VP_recycler);
         s = view.findViewById(R.id.bnt_S);
         x = view.findViewById(R.id.bnt_X);
@@ -126,7 +138,6 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
                         presenter.P2(i);
                     }
                 s.setEnabled(false);
-              //  n.fullScroll(ScrollView.FOCUS_UP);
             }
         });
 
@@ -141,18 +152,16 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
                      presenter.P2(i);
                  }
             x.setEnabled(false);
-           //  n.fullScroll(ScrollView.FOCUS_UP);
          }
      });
 
         list = new ArrayList<>();
         linearSnapHelper = new LinearLayoutHelper();
-//        LinearLayoutHelper
-        mainLinearAdapter1 = new MainLinearAdapter1(getActivity(),list,linearSnapHelper);
+        mainLinearAdapter11 = new MainLinearAdapter1(getActivity(),list,linearSnapHelper);
 
 
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
-        delegateAdapter.addAdapter(mainLinearAdapter1);
+        delegateAdapter.addAdapter(mainLinearAdapter11);
 
 
         recyclerview.setLayoutManager(virtualLayoutManager);
@@ -179,9 +188,17 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     public void OnSuucessColl(Bean i) {
         List<Bean.DataBeanX.DataBean> data = i.getData().getData();
         list.addAll(data);
-        Toast.makeText(getActivity(),data.get(1).getPrice_info()+"", Toast.LENGTH_SHORT).show();
-        mainLinearAdapter1.notifyDataSetChanged();
-      //  n.fullScroll(ScrollView.FOCUS_UP);
+        mainLinearAdapter11.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void OnSuucessTab(FooTablayoutBean f) {
+
+    }
+
+    @Override
+    public void OnSuucessClassfiy(FooClassfiyBean c) {
 
     }
 

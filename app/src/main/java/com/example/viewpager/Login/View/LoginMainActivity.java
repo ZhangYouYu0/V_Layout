@@ -1,5 +1,8 @@
 package com.example.viewpager.Login.View;
 
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -8,12 +11,21 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.mylibrary.Base.BaseActivity;
+import com.example.viewpager.CollAdaoter.MainLinearAdapter1;
+import com.example.viewpager.Fragment.CollBlankFragment;
+import com.example.viewpager.Fragment.YouBlankFragment;
 import com.example.viewpager.Login.Contract.C;
 import com.example.viewpager.Login.Prsenter.IPresneter;
+import com.example.viewpager.MainActivity;
 import com.example.viewpager.R;
+import com.example.viewpager.YouAdapter.Adapasda;
 
 import java.util.ArrayList;
+import java.util.TreeMap;
+import java.util.logging.LogRecord;
 
 public class LoginMainActivity extends BaseActivity<IPresneter> implements View.OnClickListener , C.View {
 
@@ -21,7 +33,16 @@ public class LoginMainActivity extends BaseActivity<IPresneter> implements View.
     private EditText userpws;
     private CheckBox check;
     private Button bnt;
-
+    private Handler handler = new Handler(){
+        @Override
+        public void handleMessage(@NonNull Message msg) {
+            if(msg.what==1){
+                Intent intent = new Intent(LoginMainActivity.this, Adapasda.class);
+                setResult(1,intent);
+                finish();
+            }
+        }
+    };
     int anInt=0;
     @Override
     protected int ID() {
@@ -32,6 +53,7 @@ public class LoginMainActivity extends BaseActivity<IPresneter> implements View.
     protected void initData() {
 
     }
+
 
     @Override
     protected void initView() {
@@ -95,6 +117,9 @@ public class LoginMainActivity extends BaseActivity<IPresneter> implements View.
     public void OnCg() {
         Log.e("TAG", "OnCg: 登录成功" );
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
+
+        handler.sendEmptyMessage(1);
+     //
     }
 
     @Override

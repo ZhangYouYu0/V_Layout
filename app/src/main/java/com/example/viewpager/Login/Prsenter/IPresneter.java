@@ -27,7 +27,17 @@ public class IPresneter extends BasePresenter<C.View,C.Mode> implements C.Presen
             }
 
             @Override
-            public void OnErroColl(FooLoginBean fooLoginBean) {
+            public void OnSuucessColl(FooLoginBean fooLoginBean) {
+
+            }
+
+            @Override
+            public void OnSuucessTab(FooLoginBean fooLoginBean) {
+
+            }
+
+            @Override
+            public void OnSuucessClassfiy(FooLoginBean fooLoginBean) {
 
             }
 

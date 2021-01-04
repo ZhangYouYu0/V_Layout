@@ -15,7 +15,9 @@ import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.FooBean.Bean;
+import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooCollBean;
+import com.example.viewpager.FooBean.FooTablayoutBean;
 import com.example.viewpager.HomeAdapter.MainGridAdapter1;
 import com.example.viewpager.HomeAdapter.MainGridAdapter2;
 import com.example.viewpager.HomeAdapter.MainGridAdapter3;
@@ -343,6 +345,16 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
 
     @Override
     public void OnSuucessColl(Bean i) {
+
+    }
+
+    @Override
+    public void OnSuucessTab(FooTablayoutBean f) {
+
+    }
+
+    @Override
+    public void OnSuucessClassfiy(FooClassfiyBean c) {
 
     }
 

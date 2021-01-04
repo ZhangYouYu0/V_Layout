@@ -9,4 +9,8 @@ public interface WorkIntefac {
     <I> void getColl(int id,CallBack<I> callBack);
 
     <I> void getLogin(ArrayList<String> list, CallBack<I> callBack);
+
+    <F> void getTab(String url ,CallBack<F> callBack);
+
+    <F> void getClassfiy(int id,CallBack<F> callBack);
 }

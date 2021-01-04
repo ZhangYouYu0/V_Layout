@@ -5,7 +5,11 @@ public interface CallBack <I>{
 
     void OnSuucess(String err);
 
-    void OnErroColl(I i);
+    void OnSuucessColl(I i);
+
+    void OnSuucessTab(I i);
+
+    void OnSuucessClassfiy(I i);
 
     void OnLogin(I i);
 }
