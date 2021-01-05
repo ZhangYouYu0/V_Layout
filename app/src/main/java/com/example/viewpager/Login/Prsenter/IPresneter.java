@@ -42,6 +42,16 @@ public class IPresneter extends BasePresenter<C.View,C.Mode> implements C.Presen
             }
 
             @Override
+            public void OnSuucessUserToke(FooLoginBean fooLoginBean) {
+
+            }
+
+            @Override
+            public void OnSuucessShopping(FooLoginBean fooLoginBean) {
+
+            }
+
+            @Override
             public void OnLogin(FooLoginBean fooLoginBean) {
                 iview.OnCg();
                 Integer code = fooLoginBean.getData().getCode();

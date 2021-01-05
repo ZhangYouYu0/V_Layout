@@ -9,11 +9,7 @@ import com.example.viewpager.P.ImPresenter;
 import retrofit2.http.Url;
 
 public class ImMode implements C.Mode{
-    ImPresenter imPresenter;
 
-    public ImMode(ImPresenter imPresenter) {
-        this.imPresenter = imPresenter;
-    }
 
 
     @Override
@@ -34,5 +30,10 @@ public class ImMode implements C.Mode{
     @Override
     public <I> void Next3(int id, CallBack<I> callBack) {
         RetrofitUtils.getRetrofitUils().getClassfiy(id,callBack);
+    }
+
+    @Override
+    public <I> void Next4(String url, CallBack<I> callBack) {
+    RetrofitUtils.getRetrofitUils().getShopping(url,callBack);
     }
 }

@@ -11,5 +11,10 @@ public interface CallBack <I>{
 
     void OnSuucessClassfiy(I i);
 
+    void OnSuucessUserToke(I i);
+
+
+    void OnSuucessShopping(I i);
+
     void OnLogin(I i);
 }

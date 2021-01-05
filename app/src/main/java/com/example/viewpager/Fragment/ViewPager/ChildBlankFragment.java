@@ -19,6 +19,7 @@ import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooShoppingBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
 import com.example.viewpager.HomeAdapter.MainGridAdapter;
 import com.example.viewpager.P.ImPresenter;
@@ -116,6 +117,11 @@ public class ChildBlankFragment extends BaseFragment<ImPresenter> implements C.V
         List<FooClassfiyBean.DataDTO.CurrentCategoryDTO.SubCategoryListDTO> subCategoryList1 = c.getData().getCurrentCategory().getSubCategoryList();
         subCategoryListDTOS.addAll(subCategoryList1);
         mainGridAdapter9.notifyDataSetChanged();
+    }
+
+    @Override
+    public void OnSuucessShooping(FooShoppingBean s) {
+
     }
 
     @Override

@@ -16,6 +16,7 @@ import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooShoppingBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
 import com.example.viewpager.Fragment.ViewPager.ChildBlankFragment;
 import com.example.viewpager.P.ImPresenter;
@@ -174,6 +175,11 @@ public class ClassfiyBlankFragment extends BaseFragment<ImPresenter> implements 
 
     @Override
     public void OnSuucessClassfiy(FooClassfiyBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessShooping(FooShoppingBean s) {
 
     }
 

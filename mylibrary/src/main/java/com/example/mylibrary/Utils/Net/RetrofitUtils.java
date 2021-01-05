@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -217,6 +218,80 @@ public class RetrofitUtils implements WorkIntefac{
                             Type t = actualTypeArguments[0];
                             F o = new Gson().fromJson(string, t);
                             callBack.OnSuucessClassfiy(o);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                    callBack.OnSuucess(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public <T> void getUserToke(String url, HashMap<String ,String> hashMap,HashMap<String,String>toke, CallBack<T> callBack) {
+        apiServcie.getNext(url,toke.get("X-Nideshop-Token"))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+                        try {
+                            String string = responseBody.string();
+                            Type[] genericInterfaces = callBack.getClass().getGenericInterfaces();
+                            Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
+                            Type type =actualTypeArguments[0];
+                            T o = new Gson().fromJson(string, type);
+                            callBack.OnSuucessUserToke(o);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        callBack.OnSuucess(e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    @Override
+    public <T> void getShopping(String url, CallBack<T> callBack) {
+        apiServcie.getShopping(url)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+                        try {
+                            String string = responseBody.string();
+                            Type[] genericInterfaces = callBack.getClass().getGenericInterfaces();
+                            Type[] actualTypeArguments = ((ParameterizedType) genericInterfaces[0]).getActualTypeArguments();
+                            Type type = actualTypeArguments[0];
+                            T o = new Gson().fromJson(string, type);
+                            callBack.OnSuucessShopping(o);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

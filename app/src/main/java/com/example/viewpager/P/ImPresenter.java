@@ -8,13 +8,14 @@ import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooCollBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooShoppingBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
 import com.example.viewpager.m.ImMode;
 
 public class ImPresenter  extends BasePresenter<C.View,C.Mode> implements C.Presenter {
     @Override
     public C.Mode setImode() {
-        return new ImMode(this);
+        return new ImMode();
     }
 
     @Override
@@ -42,6 +43,16 @@ public class ImPresenter  extends BasePresenter<C.View,C.Mode> implements C.Pres
 
             @Override
             public void OnSuucessClassfiy(FooHomeBean fooHomeBean) {
+
+            }
+
+            @Override
+            public void OnSuucessUserToke(FooHomeBean fooHomeBean) {
+
+            }
+
+            @Override
+            public void OnSuucessShopping(FooHomeBean fooHomeBean) {
 
             }
 
@@ -82,6 +93,16 @@ public class ImPresenter  extends BasePresenter<C.View,C.Mode> implements C.Pres
             }
 
             @Override
+            public void OnSuucessUserToke(Bean bean) {
+
+            }
+
+            @Override
+            public void OnSuucessShopping(Bean bean) {
+
+            }
+
+            @Override
             public void OnLogin(Bean bean) {
 
             }
@@ -113,6 +134,16 @@ public class ImPresenter  extends BasePresenter<C.View,C.Mode> implements C.Pres
 
         @Override
         public void OnSuucessClassfiy(FooTablayoutBean fooTablayoutBean) {
+
+        }
+
+        @Override
+        public void OnSuucessUserToke(FooTablayoutBean fooTablayoutBean) {
+
+        }
+
+        @Override
+        public void OnSuucessShopping(FooTablayoutBean fooTablayoutBean) {
 
         }
 
@@ -152,10 +183,67 @@ public class ImPresenter  extends BasePresenter<C.View,C.Mode> implements C.Pres
         }
 
         @Override
+        public void OnSuucessUserToke(FooClassfiyBean fooClassfiyBean) {
+
+        }
+
+        @Override
+        public void OnSuucessShopping(FooClassfiyBean fooClassfiyBean) {
+
+        }
+
+        @Override
         public void OnLogin(FooClassfiyBean fooClassfiyBean) {
 
         }
     });
+
+    }
+
+    @Override
+    public void P5() {
+
+        imode.Next4(ConUrl.ShoppingUrl, new CallBack<FooShoppingBean>() {
+            @Override
+            public void OnSuucessHome(FooShoppingBean fooShoppingBean) {
+
+            }
+
+            @Override
+            public void OnSuucess(String err) {
+            iview.OnErro(err);
+            }
+
+            @Override
+            public void OnSuucessColl(FooShoppingBean fooShoppingBean) {
+
+            }
+
+            @Override
+            public void OnSuucessTab(FooShoppingBean fooShoppingBean) {
+
+            }
+
+            @Override
+            public void OnSuucessClassfiy(FooShoppingBean fooShoppingBean) {
+
+            }
+
+            @Override
+            public void OnSuucessUserToke(FooShoppingBean fooShoppingBean) {
+
+            }
+
+            @Override
+            public void OnSuucessShopping(FooShoppingBean fooShoppingBean) {
+            iview.OnSuucessShooping(fooShoppingBean);
+            }
+
+            @Override
+            public void OnLogin(FooShoppingBean fooShoppingBean) {
+
+            }
+        });
 
     }
 

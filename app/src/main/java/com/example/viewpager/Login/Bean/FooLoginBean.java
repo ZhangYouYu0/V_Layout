@@ -87,7 +87,7 @@ public class FooLoginBean implements Parcelable {
         private String token;
         private UserInfoDTO userInfo;
 
-        protected DataDTO(Parcel in) {
+        public DataDTO(Parcel in) {
             if (in.readByte() == 0) {
                 code = null;
             } else {

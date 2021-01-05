@@ -17,6 +17,7 @@ import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooCollBean;
+import com.example.viewpager.FooBean.FooShoppingBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
 import com.example.viewpager.HomeAdapter.MainGridAdapter1;
 import com.example.viewpager.HomeAdapter.MainGridAdapter2;
@@ -355,6 +356,11 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
 
     @Override
     public void OnSuucessClassfiy(FooClassfiyBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessShooping(FooShoppingBean s) {
 
     }
 

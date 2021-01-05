@@ -2,7 +2,6 @@ package com.example.viewpager;
 
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 
@@ -10,19 +9,9 @@ import com.example.mylibrary.Base.BaseActivity;
 import com.example.viewpager.Fragment.ClassfiyBlankFragment;
 import com.example.viewpager.Fragment.CollBlankFragment;
 import com.example.viewpager.Fragment.HomeBlankFragment;
-import com.example.viewpager.Fragment.PageBlankFragment;
+import com.example.viewpager.Fragment.ShoppingBlankFragment;
 import com.example.viewpager.Fragment.YouBlankFragment;
-import com.example.viewpager.Login.View.LoginMainActivity;
 import com.example.viewpager.P.ImPresenter;
-
-import java.net.CookieHandler;
-import java.util.concurrent.TimeUnit;
-
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
 
 public class MainActivity  extends BaseActivity {
 
@@ -31,7 +20,7 @@ public class MainActivity  extends BaseActivity {
     RadioGroup mrg;
     LinearLayout ll;
 
-    private PageBlankFragment pageBlankFragment;
+    private ShoppingBlankFragment pageBlankFragment;
     private ClassfiyBlankFragment classfiyBlankFragment;
     private YouBlankFragment youBlankFragment;
 
@@ -44,7 +33,7 @@ public class MainActivity  extends BaseActivity {
     protected void initData() {
         homeBlankFragment = new HomeBlankFragment();
         collBlankFragment = new CollBlankFragment();
-        pageBlankFragment = new PageBlankFragment();
+        pageBlankFragment = new ShoppingBlankFragment();
         classfiyBlankFragment = new ClassfiyBlankFragment();
         youBlankFragment = new YouBlankFragment();
         FragmentTransaction supportFragmentManager = getSupportFragmentManager().beginTransaction();

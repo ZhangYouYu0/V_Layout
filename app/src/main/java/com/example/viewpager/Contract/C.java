@@ -7,6 +7,7 @@ import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooCollBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooShoppingBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
 
 public  class C {
@@ -17,6 +18,7 @@ public  class C {
          <I> void Next1(int id,CallBack<I> callBack);
          <I> void Next2(String url,CallBack<I> callBack);
          <I> void Next3(int id,CallBack<I> callBack);
+         <I> void Next4(String url,CallBack<I> callBack);
     }
 
     public interface Presenter {
@@ -24,6 +26,7 @@ public  class C {
         void P2(int i);
         void P3();
         void P4(int id);
+        void P5();
         //void P2(int id);
     }
 
@@ -32,6 +35,7 @@ public  class C {
         void OnSuucessColl(Bean i);
         void OnSuucessTab(FooTablayoutBean f);
         void OnSuucessClassfiy(FooClassfiyBean c);
+        void OnSuucessShooping(FooShoppingBean s);
         void OnErro(String err);
     }
 }

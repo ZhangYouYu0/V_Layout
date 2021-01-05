@@ -8,4 +8,8 @@ public  class ConUrl {
     public static String TopicUrltwo ="api/topic/list?page=2&size=10";
 
     public static String TabUrl = "api/catalog/index?id=1005000";
+
+    public static String TokeUrl = "api/auth/refreshToken";
+
+    public static String ShoppingUrl = "api/cart/index";
 }
