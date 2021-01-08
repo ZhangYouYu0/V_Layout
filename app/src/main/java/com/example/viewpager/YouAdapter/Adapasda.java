@@ -1,12 +1,17 @@
 package com.example.viewpager.YouAdapter;
 
 import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.viewpager.R;
+
 public class Adapasda extends RecyclerView.Adapter {
+
     Context context;
 
     public Adapasda(Context context) {
@@ -16,7 +21,8 @@ public class Adapasda extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View root = LayoutInflater.from(context).inflate(R.layout.you_item, parent, false);
+        return new ViewHolder(root);
     }
 
     @Override
@@ -26,6 +32,12 @@ public class Adapasda extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 1;
+    }
+
+    private class ViewHolder extends RecyclerView.ViewHolder {
+        public ViewHolder(View root) {
+            super(root);
+        }
     }
 }

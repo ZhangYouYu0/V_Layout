@@ -56,4 +56,38 @@
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:id="@+id/tv_check_true"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="已选择:>"/>
+
+        <TextView
+            android:background="@drawable/backgroudselect"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_check_true"
+            android:text="-"
+            android:visibility="gone"
+            android:id="@+id/tv_minuse"
+            android:gravity="center"
+           app:layout_constraintRight_toLeftOf="@id/tv_name_number"/>
+
+
+         <TextView
+            android:background="@drawable/backgroudselect"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_check_true"
+            android:text="+"
+             android:visibility="gone"
+             android:id="@+id/tv_plus"
+            android:gravity="center"
+           app:layout_constraintLeft_toRightOf="@id/tv_name_number"/>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

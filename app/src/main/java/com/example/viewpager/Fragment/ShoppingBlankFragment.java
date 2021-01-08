@@ -1,5 +1,6 @@
 package com.example.viewpager.Fragment;
 
+import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,8 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
     private Button bnt;
     private TextView tv_pirc1;
     private int length;
+    private int j;
+    private int newpotions;
 
     @Override
     public int ID() {
@@ -49,6 +52,7 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
     @Override
     protected void initView(View view) {
         o = 0;
+        j = 0;
         recyclerview = view.findViewById(R.id.Shopping_recy);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         checked = view.findViewById(R.id.checked_all);
@@ -81,26 +85,51 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
 
         });
         length = 0;
-        bnt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
 
+        fooShoppingBean.setJudge(0);
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                edit.setText("完成");
+                j++;
+                if(j%2==0 && j!=0){
+                    fooShoppingBean.setJudge(0);
+                    edit.setText("编辑");
+                }else{
+                    fooShoppingBean.setJudge(1);
+                    edit.setText("完成");
+                }
+                adapter.notifyDataSetChanged();
+
             }
         });
+
 
 
         list = new ArrayList<>();
         adapter = new MyShoppingAdapter(list,getActivity(),fooShoppingBean);
         recyclerview.setAdapter(adapter);
+        initDelete();
+    }
 
+    public void initDelete(){
+
+        adapter.setOnClickItemDelete(new MyShoppingAdapter.OnClickItemDelete() {
+            @Override
+            public void delete(int pos) {
+                newpotions = pos;
+
+//                Toast.makeText(getContext(), "0", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        bnt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                list.remove(newpotions);
+                adapter.notifyDataSetChanged();
+            }
+        });
 
     }
 

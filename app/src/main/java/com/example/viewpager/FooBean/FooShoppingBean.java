@@ -1,5 +1,7 @@
 package com.example.viewpager.FooBean;
 
+import android.content.Intent;
+
 import java.util.List;
 
 public class FooShoppingBean {
@@ -13,6 +15,16 @@ public class FooShoppingBean {
     private Integer errno;
     private String errmsg;
     private DataDTO data;
+
+    private Integer Judge;
+
+    public Integer getJudge() {
+        return Judge;
+    }
+
+    public void setJudge(Integer judge) {
+        Judge = judge;
+    }
 
     private boolean Ifan;
 

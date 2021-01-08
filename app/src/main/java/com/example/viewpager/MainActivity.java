@@ -45,8 +45,8 @@ public class MainActivity  extends BaseActivity {
                 .show(homeBlankFragment)
                 .hide(collBlankFragment)
                 .hide(pageBlankFragment)
-                .hide(youBlankFragment)
                 .hide(classfiyBlankFragment)
+                .hide(youBlankFragment)
                 .commit();
     }
 
@@ -85,7 +85,7 @@ public class MainActivity  extends BaseActivity {
 
 
                     case R.id.rb5:
-                        fragmentTransaction.show(youBlankFragment).hide(collBlankFragment).hide(homeBlankFragment).hide(classfiyBlankFragment).hide(youBlankFragment).commit();
+                        fragmentTransaction.show(youBlankFragment).hide(collBlankFragment).hide(homeBlankFragment).hide(classfiyBlankFragment).hide(pageBlankFragment).commit();
 
                         break;
                 }

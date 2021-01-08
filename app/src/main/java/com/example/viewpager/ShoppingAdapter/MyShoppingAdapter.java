@@ -22,6 +22,9 @@ public class MyShoppingAdapter extends RecyclerView.Adapter<MyShoppingAdapter.Vi
     ArrayList<FooShoppingBean.DataDTO.CartListDTO> list;
     Context context;
     FooShoppingBean fooShoppingBean;
+    private int i;
+    private Integer number;
+
     public MyShoppingAdapter(ArrayList<FooShoppingBean.DataDTO.CartListDTO> list, Context context,FooShoppingBean fooShoppingBean) {
         this.list = list;
         this.context = context;
@@ -42,14 +45,67 @@ public class MyShoppingAdapter extends RecyclerView.Adapter<MyShoppingAdapter.Vi
         holder.name.setText(cartListDTO.getGoods_name());
         holder.pic.setText(cartListDTO.getMarket_price()+"￥");
 
+        number = cartListDTO.getNumber();
         Glide.with(context).load(cartListDTO.getList_pic_url()).into(holder.imageView);
         boolean ifan = fooShoppingBean.isIfan();
+
         if(ifan){
             holder.checkBox.setChecked(true);
         }else{
             holder.checkBox.setChecked(false);
         }
 
+        Integer judge = fooShoppingBean.getJudge();
+        Toast.makeText(context, judge+"H", Toast.LENGTH_SHORT).show();
+        if(judge>0){
+            holder.plsu.setVisibility(View.VISIBLE);
+            holder.minus.setVisibility(View.VISIBLE);
+            holder.checktrue.setVisibility(View.VISIBLE);
+            holder.name.setVisibility(View.GONE);
+            holder.num.setText(""+cartListDTO.getNumber());
+        //    Toast.makeText(context, judge+"/**", Toast.LENGTH_SHORT).show();
+        }else{
+          //  Toast.makeText(context, judge+".", Toast.LENGTH_SHORT).show();
+            holder.plsu.setVisibility(View.GONE);
+            holder.minus.setVisibility(View.GONE);
+            holder.checktrue.setVisibility(View.GONE);
+            holder.name.setVisibility(View.VISIBLE);
+        }
+
+        i = 0;
+        holder.plsu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(number>10){
+                }else{
+                    number++;
+                    holder.num.setText(number+"");
+                }
+
+            }
+        });
+        holder.minus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(number<0){
+                    Toast.makeText(context, "好家伙给我干到负数去了？", Toast.LENGTH_SHORT).show();
+                }else{
+                  number--;
+                    holder.num.setText(number+"");
+                }
+
+            }
+        });
+
+
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onClickItemDelete!=null){
+                    onClickItemDelete.delete(position);
+                }
+            }
+        });
 
     }
 
@@ -58,13 +114,14 @@ public class MyShoppingAdapter extends RecyclerView.Adapter<MyShoppingAdapter.Vi
         return list.size();
     }
 
-  public   interface OnClickitemcheckbox{
-        void box(int sum);
-    }
-    OnClickitemcheckbox onClickitemcheckbox;
 
-    public void setOnClickitemcheckbox(OnClickitemcheckbox onClickitemcheckbox) {
-        this.onClickitemcheckbox = onClickitemcheckbox;
+    public interface OnClickItemDelete{
+        void delete(int pos);
+    }
+    OnClickItemDelete onClickItemDelete;
+
+    public void setOnClickItemDelete(OnClickItemDelete onClickItemDelete) {
+        this.onClickItemDelete = onClickItemDelete;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -73,6 +130,9 @@ public class MyShoppingAdapter extends RecyclerView.Adapter<MyShoppingAdapter.Vi
         TextView num;
         ImageView imageView;
         CheckBox checkBox;
+        TextView minus;
+        TextView plsu;
+        TextView checktrue;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.tv_name_text6);
@@ -80,6 +140,9 @@ public class MyShoppingAdapter extends RecyclerView.Adapter<MyShoppingAdapter.Vi
             num=itemView.findViewById(R.id.tv_name_number);
             imageView=itemView.findViewById(R.id.image_checked);
             checkBox=itemView.findViewById(R.id.checked);
+            minus=itemView.findViewById(R.id.tv_minuse);
+            plsu=itemView.findViewById(R.id.tv_plus);
+            checktrue=itemView.findViewById(R.id.tv_check_true);
         }
     }
 }

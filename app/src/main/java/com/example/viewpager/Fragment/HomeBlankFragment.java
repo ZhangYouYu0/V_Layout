@@ -43,6 +43,7 @@ import com.example.viewpager.HomeAdapter.MainSingleAdapter8;
 import com.example.viewpager.HomeAdapter.MainSingleAdapter9;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.HomeAdapter.MainSingleadapter14;
 import com.example.viewpager.P.ImPresenter;
 import com.example.viewpager.R;
 
@@ -100,6 +101,9 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private MainSingleAdapter11 mainSingleAdapter11;
     private MainGridAdapter8 mainGridAdapter8;
     private ArrayList<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsListDTOS5;
+    private ArrayList<FooHomeBean.DataDTO.TopicListDTO> topicListDTOS;
+    private SingleLayoutHelper singleLayoutHelper12;
+    private MainSingleadapter14 mainSingleadapter14;
 
     public HomeBlankFragment() {
         // Required empty public constructor
@@ -185,6 +189,12 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         SingleLayoutHelper singleLayoutHelper5 = new SingleLayoutHelper();
         MainSingleAdapter5 mainSingleAdapter5 = new MainSingleAdapter5(singleLayoutHelper5,getActivity());
 
+        topicListDTOS = new ArrayList<>();
+        singleLayoutHelper12 = new SingleLayoutHelper();
+        mainSingleadapter14 = new MainSingleadapter14(topicListDTOS,getActivity(),singleLayoutHelper);
+
+
+
         SingleLayoutHelper singleLayoutHelper6 = new SingleLayoutHelper();
         MainSingleAdapter6 mainSingleAdapter6 = new MainSingleAdapter6(singleLayoutHelper6,getActivity());
 
@@ -246,6 +256,7 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         delegateAdapter.addAdapter(mainSingleAdapter4);
         delegateAdapter.addAdapter(this.mainGridAdapter3);
         delegateAdapter.addAdapter(mainSingleAdapter5);
+        delegateAdapter.addAdapter(mainSingleadapter14);
         delegateAdapter.addAdapter(mainSingleAdapter6);
         delegateAdapter.addAdapter(mainGridAdapter31);
         delegateAdapter.addAdapter(mainSingleAdapter7);
@@ -296,6 +307,9 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         hotGoodsListDTOS.addAll(hotGoodsList);
         mainGridAdapter3.notifyDataSetChanged();
 
+        List<FooHomeBean.DataDTO.TopicListDTO> topicList = i.getData().getTopicList();
+        topicListDTOS.addAll(topicList);
+        mainSingleadapter14.notifyDataSetChanged();
 
         List<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = i.getData().getCategoryList().get(0).getGoodsList();
         goodsListDTOS.addAll(goodsList);
