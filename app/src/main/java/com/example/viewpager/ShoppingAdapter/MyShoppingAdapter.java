@@ -56,7 +56,7 @@ public class MyShoppingAdapter extends RecyclerView.Adapter<MyShoppingAdapter.Vi
         }
 
         Integer judge = fooShoppingBean.getJudge();
-        Toast.makeText(context, judge+"H", Toast.LENGTH_SHORT).show();
+       // Toast.makeText(context, judge+"H", Toast.LENGTH_SHORT).show();
         if(judge>0){
             holder.plsu.setVisibility(View.VISIBLE);
             holder.minus.setVisibility(View.VISIBLE);
@@ -106,6 +106,8 @@ public class MyShoppingAdapter extends RecyclerView.Adapter<MyShoppingAdapter.Vi
                 }
             }
         });
+
+
 
     }
 

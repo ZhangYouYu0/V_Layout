@@ -1,7 +1,7 @@
 package com.example.viewpager.Login.Mode.StartMode;
 
-import com.example.mylibrary.Utils.Net.CallBack;
-import com.example.mylibrary.Utils.Net.RetrofitUtils;
+import com.example.mylibrary.Utils.Net.One.CallBack;
+import com.example.mylibrary.Utils.Net.One.RetrofitUtils;
 import com.example.viewpager.Login.Contract.StartContract.C;
 
 import java.util.HashMap;

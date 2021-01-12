@@ -74,11 +74,28 @@ public class MainGridAdapter1 extends DelegateAdapter.Adapter {
         Glide.with(context).load(brandListDTO.getNew_pic_url()).into(yViewHolder.imageView);
         yViewHolder.textView.setText(brandListDTO.getName());
         yViewHolder.textView1.setText(brandListDTO.getFloor_price()+"元起");
+        yViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dj!=null){
+                    dj.dj(brandListDTO.getNew_pic_url(),brandListDTO.getSimple_desc(),brandListDTO.getName());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface dj{
+        void dj(String url,String desc,String name);
+    }
+    dj dj;
+
+    public void setDj(MainGridAdapter1.dj dj) {
+        this.dj = dj;
     }
 
     private class YViewHolder extends RecyclerView.ViewHolder {

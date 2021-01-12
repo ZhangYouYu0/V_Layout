@@ -1,14 +1,13 @@
 package com.example.viewpager.Login.Prsenter;
 
 import com.example.mylibrary.Base.BasePresenter;
-import com.example.mylibrary.Utils.Net.CallBack;
+import com.example.mylibrary.Utils.Net.One.CallBack;
 import com.example.viewpager.Login.Bean.FooLoginBean;
 import com.example.viewpager.Login.Contract.C;
 import com.example.viewpager.Login.Mode.IMode;
 import com.tencent.mmkv.MMKV;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class IPresneter extends BasePresenter<C.View,C.Mode> implements C.Presenter {
 
@@ -52,6 +51,21 @@ public class IPresneter extends BasePresenter<C.View,C.Mode> implements C.Presen
             }
 
             @Override
+            public void OnSuucessHomeClick(FooLoginBean fooLoginBean) {
+
+            }
+
+            @Override
+            public void OnSuucessHomeSpXq(FooLoginBean fooLoginBean) {
+
+            }
+
+            @Override
+            public void OnSuucessGWC(FooLoginBean fooLoginBean) {
+
+            }
+
+            @Override
             public void OnLogin(FooLoginBean fooLoginBean) {
                 iview.OnCg();
                 Integer code = fooLoginBean.getData().getCode();
@@ -70,5 +84,6 @@ public class IPresneter extends BasePresenter<C.View,C.Mode> implements C.Presen
     @Override
     public C.Mode setImode() {
         return new IMode(this);
+
     }
 }

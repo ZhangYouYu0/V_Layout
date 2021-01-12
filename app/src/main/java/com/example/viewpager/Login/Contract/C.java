@@ -2,10 +2,9 @@ package com.example.viewpager.Login.Contract;
 
 import com.example.mylibrary.Base.BaseMode;
 import com.example.mylibrary.Base.BaseView;
-import com.example.mylibrary.Utils.Net.CallBack;
+import com.example.mylibrary.Utils.Net.One.CallBack;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class C {
     public interface Mode extends BaseMode{

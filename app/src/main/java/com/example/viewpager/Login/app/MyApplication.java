@@ -15,11 +15,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
         this.application = this;
-
         MMKV.initialize(this);
-
-
     }
 }

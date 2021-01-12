@@ -1,9 +1,8 @@
 package com.example.viewpager.Login.Prsenter.StartPresenter;
 
 import com.example.mylibrary.Base.BasePresenter;
-import com.example.mylibrary.Base.BaseView;
-import com.example.mylibrary.Utils.Net.CallBack;
-import com.example.mylibrary.Utils.Net.ConUrl;
+import com.example.mylibrary.Utils.Net.One.CallBack;
+import com.example.mylibrary.Utils.Net.One.ConUrl;
 import com.example.viewpager.Login.Bean.FooLoginBean;
 import com.example.viewpager.Login.Bean.StartBean.FooTokeBean;
 import com.example.viewpager.Login.Contract.StartContract.C;
@@ -64,6 +63,21 @@ public class StartPresneter extends BasePresenter<C.StartView,C.StartMode> imple
 
                 @Override
                 public void OnSuucessShopping(FooTokeBean fooTokeBean) {
+
+                }
+
+                @Override
+                public void OnSuucessHomeClick(FooTokeBean fooTokeBean) {
+
+                }
+
+                @Override
+                public void OnSuucessHomeSpXq(FooTokeBean fooTokeBean) {
+
+                }
+
+                @Override
+                public void OnSuucessGWC(FooTokeBean fooTokeBean) {
 
                 }
 

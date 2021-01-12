@@ -8,36 +8,39 @@
     >
 
     <LinearLayout
+        android:id="@+id/bnt_ll"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:id="@+id/bnt_ll"
-        />
+        android:orientation="vertical" />
 
     <RadioGroup
         android:id="@+id/rg"
         android:layout_width="match_parent"
-        android:layout_height="66dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
+           android:drawableTop="@drawable/home"
             android:id="@+id/rb1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:checked="true"
+            android:textSize="20dp"
             android:text="首页"
             android:gravity="center"
             />
         <RadioButton
+            android:drawableTop="@drawable/coll"
             android:id="@+id/rb2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
             android:text="专题"
+            android:textSize="20dp"
             android:gravity="center"
              />
 
@@ -47,7 +50,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:drawableTop="@drawable/classfiy"
             android:text="分类"
+            android:textSize="20dp"
             android:gravity="center"
              />
 
@@ -57,7 +62,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:button="@null"
+            android:drawableTop="@drawable/shopping"
             android:text="购物车"
+            android:textSize="20dp"
             android:gravity="center"
              />
 
@@ -68,6 +75,8 @@
             android:layout_weight="1"
             android:button="@null"
             android:text="我的"
+            android:textSize="20dp"
+            android:drawableTop="@drawable/you"
             android:gravity="center"
              />
     </RadioGroup>

@@ -1,5 +1,6 @@
 package com.example.viewpager.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -16,9 +18,16 @@ import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
-import com.example.viewpager.FooBean.FooCollBean;
+import com.example.viewpager.FooBean.FooHomeClickBean;
 import com.example.viewpager.FooBean.FooShoppingBean;
+import com.example.viewpager.FooBean.FooSpBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
+import com.example.viewpager.FooBean.XqBean;
+import com.example.viewpager.Fragment.HomeActivity.HomeChildFragment.Activity.HomeChileShoppingMainActivity;
+import com.example.viewpager.Fragment.HomeActivity.HomeChildFragment.HomeChildeBlankFragment;
+import com.example.viewpager.Fragment.HomeActivity.HomeClickMainActivity;
+import com.example.viewpager.Fragment.HomeActivity.HomeMainActivity;
+import com.example.viewpager.Fragment.HomeActivity.SpXq.SpXqMainActivity;
 import com.example.viewpager.HomeAdapter.MainGridAdapter1;
 import com.example.viewpager.HomeAdapter.MainGridAdapter2;
 import com.example.viewpager.HomeAdapter.MainGridAdapter3;
@@ -165,12 +174,14 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         gridLayoutHelper.setSpanCount(5);
         mainGridAdapter = new MainGridAdapter(gridLayoutHelper, getActivity(), channelDTOS);
 
+
         SingleLayoutHelper singleLayoutHelper2 = new SingleLayoutHelper();
         mainSingleAdapte2r = new MainSingleAdapter2(singleLayoutHelper2,getActivity());
 
         brandListDTOS = new ArrayList<>();
         GridLayoutHelper gridLayoutHelper1 = new GridLayoutHelper(2);
         mainGridAdapter1 = new MainGridAdapter1(gridLayoutHelper1, getActivity(),brandListDTOS);
+
 
         SingleLayoutHelper singleLayoutHelper3 = new SingleLayoutHelper();
         mainSingleAdapter3 = new MainSingleAdapter3(singleLayoutHelper3,getActivity());
@@ -272,6 +283,59 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
 
+
+        initItemClick();
+    }
+
+    private void initItemClick() {
+
+        //人气推送点击事件
+        mainGridAdapter3.setDj(new MainLineranAdapter.dj() {
+            @Override
+            public void dj(int pos) {
+                FooHomeBean.DataDTO.HotGoodsListDTO hotGoodsListDTO = hotGoodsListDTOS.get(pos);
+                Intent intent = new Intent(getActivity(), HomeChileShoppingMainActivity.class);
+                intent.putExtra("id",hotGoodsListDTO.getId());
+             //   Toast.makeText(getContext(), hotGoodsListDTO.getId()+"*/", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                Log.e("TAG", "dj: "+hotGoodsListDTO.getId() );
+            }
+        });
+
+        //新品首发，购物车
+        mainGridAdapter2.setDj(new MainGridAdapter2.dj() {
+            @Override
+            public void dj(int i) {
+                Toast.makeText(getContext(), i+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), SpXqMainActivity.class);
+                intent.putExtra("id",i);
+                startActivity(intent);
+            }
+        });
+
+
+        //品牌直供商商品详情页
+        mainGridAdapter1.setDj(new MainGridAdapter1.dj() {
+            @Override
+            public void dj(String url, String desc, String name) {
+                Intent intent = new Intent(getActivity(), HomeClickMainActivity.class);
+                intent.putExtra("name",name);
+                intent.putExtra("url",url);
+                intent.putExtra("desc",desc);
+                startActivity(intent);
+            }
+        });
+
+        //购物车详情页
+        mainGridAdapter.setOnClickItem(new MainGridAdapter.OnClickItem() {
+            @Override
+            public void ItemId(int categoryId,int id) {
+                Intent intent = new Intent(getActivity(),HomeMainActivity.class);
+                intent.putExtra("id",categoryId);
+                intent.putExtra("id1",id);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -375,6 +439,21 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
 
     @Override
     public void OnSuucessShooping(FooShoppingBean s) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeClick(FooHomeClickBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeSpxq(FooSpBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeGwc(XqBean xqBean) {
 
     }
 

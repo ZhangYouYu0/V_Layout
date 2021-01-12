@@ -9,16 +9,18 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooHomeClickBean;
 import com.example.viewpager.FooBean.FooShoppingBean;
+import com.example.viewpager.FooBean.FooSpBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
-import com.example.viewpager.Fragment.ViewPager.ChildBlankFragment;
+import com.example.viewpager.FooBean.XqBean;
+import com.example.viewpager.Fragment.ClassfiyChild.ChildBlankFragment;
 import com.example.viewpager.P.ImPresenter;
 import com.example.viewpager.R;
 
@@ -180,6 +182,21 @@ public class ClassfiyBlankFragment extends BaseFragment<ImPresenter> implements 
 
     @Override
     public void OnSuucessShooping(FooShoppingBean s) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeClick(FooHomeClickBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeSpxq(FooSpBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeGwc(XqBean xqBean) {
 
     }
 

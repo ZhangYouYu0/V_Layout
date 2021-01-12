@@ -51,11 +51,28 @@ public class MainLineranAdapter extends DelegateAdapter.Adapter{
         imViewHolder.textView1.setText(hotGoodsListDTO.getGoods_brief());
         imViewHolder.textView2.setText("￥"+hotGoodsListDTO.getRetail_price());
         Glide.with(context).load(hotGoodsListDTO.getList_pic_url()).into(imViewHolder.imageView);
+        imViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dj!=null){
+                    dj.dj(position);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface dj{
+        void dj(int pos);
+    }
+    dj dj;
+
+    public void setDj(MainLineranAdapter.dj dj) {
+        this.dj = dj;
     }
 
     private class ImViewHolder extends RecyclerView.ViewHolder {

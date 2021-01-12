@@ -55,11 +55,28 @@ public class MainGridAdapter2 extends DelegateAdapter.Adapter {
         yViewHolder.textView.setText(newGoodsListDTO.getName());
         yViewHolder.textView1.setText("￥"+ Html.fromHtml(""+newGoodsListDTO.getRetail_price()+""));
         Glide.with(context).load(newGoodsListDTO.getList_pic_url()).into(yViewHolder.imageView);
+        yViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dj!=null){
+                    dj.dj(newGoodsListDTO.getId());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface dj{
+        void dj(int i);
+    }
+    dj dj;
+
+    public void setDj(MainGridAdapter2.dj dj) {
+        this.dj = dj;
     }
 
     private class YViewHolder extends RecyclerView.ViewHolder {

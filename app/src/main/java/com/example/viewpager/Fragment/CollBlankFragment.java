@@ -27,8 +27,11 @@ import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooCollBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooHomeClickBean;
 import com.example.viewpager.FooBean.FooShoppingBean;
+import com.example.viewpager.FooBean.FooSpBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
+import com.example.viewpager.FooBean.XqBean;
 import com.example.viewpager.Login.View.LoginMainActivity;
 import com.example.viewpager.MainActivity;
 import com.example.viewpager.P.ImPresenter;
@@ -205,6 +208,21 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
 
     @Override
     public void OnSuucessShooping(FooShoppingBean s) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeClick(FooHomeClickBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeSpxq(FooSpBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeGwc(XqBean xqBean) {
 
     }
 

@@ -2,7 +2,7 @@ package com.example.viewpager.Login.Contract.StartContract;
 
 import com.example.mylibrary.Base.BaseMode;
 import com.example.mylibrary.Base.BaseView;
-import com.example.mylibrary.Utils.Net.CallBack;
+import com.example.mylibrary.Utils.Net.One.CallBack;
 
 import java.util.HashMap;
 

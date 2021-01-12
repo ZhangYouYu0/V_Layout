@@ -29,8 +29,9 @@
             android:layout_marginLeft="10dp"
             android:text="      点击登录"
             android:textSize="18dp"
+            android:id="@+id/tv_you_login"
             android:gravity="center"
-            android:drawableLeft="@drawable/ic_icon_0"/>
+            android:drawableLeft="@drawable/home"/>
 
 
     </LinearLayout>

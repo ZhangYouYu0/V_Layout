@@ -17,8 +17,11 @@ import com.example.viewpager.Contract.C;
 import com.example.viewpager.FooBean.Bean;
 import com.example.viewpager.FooBean.FooClassfiyBean;
 import com.example.viewpager.FooBean.FooHomeBean;
+import com.example.viewpager.FooBean.FooHomeClickBean;
 import com.example.viewpager.FooBean.FooShoppingBean;
+import com.example.viewpager.FooBean.FooSpBean;
 import com.example.viewpager.FooBean.FooTablayoutBean;
+import com.example.viewpager.FooBean.XqBean;
 import com.example.viewpager.P.ImPresenter;
 import com.example.viewpager.R;
 import com.example.viewpager.ShoppingAdapter.MyShoppingAdapter;
@@ -53,6 +56,7 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
     protected void initView(View view) {
         o = 0;
         j = 0;
+
         recyclerview = view.findViewById(R.id.Shopping_recy);
         recyclerview.setLayoutManager(new LinearLayoutManager(getContext()));
         checked = view.findViewById(R.id.checked_all);
@@ -113,7 +117,6 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
     }
 
     public void initDelete(){
-
         adapter.setOnClickItemDelete(new MyShoppingAdapter.OnClickItemDelete() {
             @Override
             public void delete(int pos) {
@@ -122,7 +125,6 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
 //                Toast.makeText(getContext(), "0", Toast.LENGTH_SHORT).show();
             }
         });
-
         bnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,13 +132,15 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
                 adapter.notifyDataSetChanged();
             }
         });
-
     }
 
     @Override
     protected void initData() {
-    presenter.P5();
-
+            presenter.P5();
+            if(list.size()>0 && list!=null){
+                list.clear();
+                presenter.P5();
+            }
     }
 
     @Override
@@ -167,6 +171,7 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
     @Override
     public void OnSuucessShooping(FooShoppingBean s) {
         List<FooShoppingBean.DataDTO.CartListDTO> cartList = s.getData().getCartList();
+
         list.addAll(cartList);
         length =list.size();
         boolean ifan = fooShoppingBean.isIfan();
@@ -177,6 +182,22 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
         }
 
         adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    public void OnSuucessHomeClick(FooHomeClickBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeSpxq(FooSpBean c) {
+
+    }
+
+    @Override
+    public void OnSuucessHomeGwc(XqBean xqBean) {
+
     }
 
     @Override

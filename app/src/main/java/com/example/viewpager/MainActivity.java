@@ -2,7 +2,9 @@ package com.example.viewpager;
 
 import androidx.fragment.app.FragmentTransaction;
 
+import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.example.mylibrary.Base.BaseActivity;
@@ -60,6 +62,7 @@ public class MainActivity  extends BaseActivity {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 switch (checkedId){
                     case R.id.rb1:
+                        RadioButton rb1 = findViewById(R.id.rb1);
                         fragmentTransaction.show(homeBlankFragment).hide(collBlankFragment).hide(classfiyBlankFragment).hide(youBlankFragment).hide(pageBlankFragment).commit();
                         // Toast.makeText(MainActivity.this, "1", Toast.LENGTH_SHORT).show();
                         break;
@@ -67,8 +70,6 @@ public class MainActivity  extends BaseActivity {
                         // Toast.makeText(MainActivity.this, "2", Toast.LENGTH_SHORT).show();
 
                         fragmentTransaction.show(collBlankFragment).hide(homeBlankFragment).hide(classfiyBlankFragment).hide(youBlankFragment).hide(pageBlankFragment).commit();
-
-
 
                         break;
 

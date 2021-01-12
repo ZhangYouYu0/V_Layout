@@ -2,7 +2,10 @@ package com.example.viewpager.Fragment;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -30,6 +33,7 @@ public class YouBlankFragment extends BaseFragment<ImPresenter> {
     private int num;
     boolean AnIf = false;
     private RecyclerView recycerview;
+    private TextView login;
 
     @Override
     public int ID() {
@@ -38,8 +42,15 @@ public class YouBlankFragment extends BaseFragment<ImPresenter> {
 
     @Override
     protected void initView(View view) {
-
-
+        Adapasda adapasda = new Adapasda(getActivity());
+        login = view.findViewById(R.id.tv_you_login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(getActivity(), LoginMainActivity.class);
+//                startActivityForResult(intent,0);
+            }
+        });
 //        if(AnIf){
 //            AnIf=true;
 //        }else{
@@ -52,7 +63,7 @@ public class YouBlankFragment extends BaseFragment<ImPresenter> {
 //                        public void accept(Long aLong) throws Exception {
 //                            num++;
 //                            if(num==1){
-//                                startActivity(new Intent(getActivity(), LoginMainActivity.class));
+//
 //                                subscribe.dispose();
 //                            }
 //                        }
@@ -69,5 +80,13 @@ public class YouBlankFragment extends BaseFragment<ImPresenter> {
     @Override
     public ImPresenter add() {
         return new ImPresenter();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==0&&resultCode==1){
+          login.setText("退出登录");
+        }
     }
 }

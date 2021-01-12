@@ -6,12 +6,18 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/d"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ViewPager">
-        <activity android:name=".Login.View.StartMainActivity"></activity>
+        <activity android:name=".Fragment.HomeActivity.SpXq.PlMainActivity"></activity>
+        <activity android:name=".Fragment.HomeActivity.HomeChildFragment.Activity.HomeChileShoppingMainActivity" />
+        <activity android:name=".Fragment.HomeActivity.SpXq.SpXqMainActivity" />
+        <activity android:name=".Fragment.HomeActivity.HomeClickMainActivity" />
+        <activity android:name=".Fragment.ClassfiyChild.ClassfiyMainActivity" />
+        <activity android:name=".Fragment.HomeActivity.HomeMainActivity" />
+        <activity android:name=".Login.View.StartMainActivity" />
         <activity android:name=".Login.View.LoginMainActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -117,7 +117,6 @@ public class LoginMainActivity extends BaseActivity<IPresneter> implements View.
     public void OnCg() {
         Log.e("TAG", "OnCg: 登录成功" );
         Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-
         handler.sendEmptyMessage(1);
      //
     }

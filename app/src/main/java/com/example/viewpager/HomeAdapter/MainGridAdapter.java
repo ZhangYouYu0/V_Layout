@@ -49,11 +49,29 @@ public class MainGridAdapter extends DelegateAdapter.Adapter {
         GridViewHolder gridLayoutHelper = (GridViewHolder) holder;
         Glide.with(context).load(channelDTO.getIcon_url()).into(gridLayoutHelper.imageView);
         gridLayoutHelper.textView.setText(channelDTO.getName());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(onClickItem!=null){
+                    Integer categoryid = channelDTO.getCategoryid();
+                    onClickItem.ItemId(categoryid,channelDTO.getId());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface OnClickItem{
+        void ItemId(int categoryId,int id);
+    }
+    OnClickItem onClickItem;
+
+    public void setOnClickItem(OnClickItem onClickItem) {
+        this.onClickItem = onClickItem;
     }
 
     private class GridViewHolder extends RecyclerView.ViewHolder {

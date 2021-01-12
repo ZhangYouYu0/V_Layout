@@ -48,11 +48,29 @@ public class MainGridAdapter9 extends DelegateAdapter.Adapter{
         FooClassfiyBean.DataDTO.CurrentCategoryDTO.SubCategoryListDTO subCategoryListDTO = list.get(position);
         grViewHolder.textView.setText(subCategoryListDTO.getName());
         Glide.with(context).load(subCategoryListDTO.getWap_banner_url()).into(grViewHolder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(dj!=null){
+//                    dj.dj(subCategoryListDTO.getId());
+                    dj.dj(subCategoryListDTO.getShow_index());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface dj{
+        void dj(int id);
+    }
+    dj dj;
+
+    public void setDj(MainGridAdapter9.dj dj) {
+        this.dj = dj;
     }
 
     private class GrViewHolder extends RecyclerView.ViewHolder {

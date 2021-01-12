@@ -1,12 +1,11 @@
 package com.example.viewpager.Login.Mode;
 
-import com.example.mylibrary.Utils.Net.CallBack;
-import com.example.mylibrary.Utils.Net.RetrofitUtils;
+import com.example.mylibrary.Utils.Net.One.CallBack;
+import com.example.mylibrary.Utils.Net.One.RetrofitUtils;
 import com.example.viewpager.Login.Contract.C;
 import com.example.viewpager.Login.Prsenter.IPresneter;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 public class IMode implements C.Mode{
     IPresneter presneter;
