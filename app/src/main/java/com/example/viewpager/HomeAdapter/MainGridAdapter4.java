@@ -49,12 +49,30 @@ public class MainGridAdapter4 extends DelegateAdapter.Adapter {
         gridViewHolder.textView.setText(goodsListDTO.getName());
         gridViewHolder.textView1.setText("￥"+goodsListDTO.getRetail_price());
         Glide.with(context).load(goodsListDTO.getList_pic_url()).into(gridViewHolder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dj!=null){
+                    dj.dj(goodsListDTO.getId());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
     }
+
+    public interface dj{
+        void dj(int pos);
+    }
+    dj dj;
+
+    public void setDj(MainGridAdapter4.dj dj) {
+        this.dj = dj;
+    }
+
 
     private class GridViewHolder extends RecyclerView.ViewHolder {
 

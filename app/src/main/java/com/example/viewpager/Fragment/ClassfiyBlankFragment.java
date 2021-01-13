@@ -123,6 +123,7 @@ public class ClassfiyBlankFragment extends BaseFragment<ImPresenter> implements 
             ChildBlankFragment childBlankFragment = new ChildBlankFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("id",id);
+            bundle.putInt("index",categoryList.get(i).getShow_index());
             childBlankFragment.setArguments(bundle);
             list.add(childBlankFragment);
         }

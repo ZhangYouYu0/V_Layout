@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mylibrary.Base.BaseFragment;
@@ -35,6 +36,8 @@ public class ClassChilBlankFragment extends BaseFragment<ImPresenter> implements
     private RecyclerView recyclerview;
     private ArrayList<FooHomeClickBean.DataDTO.DataDTOX> list;
     private MyHomeChildeAdapter myHomeChildeAdapter;
+    private TextView title;
+    private int id;
 
     @Override
     public int ID() {
@@ -43,8 +46,17 @@ public class ClassChilBlankFragment extends BaseFragment<ImPresenter> implements
 
     @Override
     protected void initView(View view) {
+
+        Bundle arguments = getArguments();
+        id = arguments.getInt("id", 0);
+        String name = arguments.getString("title");
+
+
+        title = view.findViewById(R.id.tv_classfiy_child_title);
         recyclerview = view.findViewById(R.id.recyclerview_classfiy);
         recyclerview.setLayoutManager(new GridLayoutManager(getActivity(),2));
+
+        title.setText(name);
 
         list = new ArrayList<>();
         myHomeChildeAdapter = new MyHomeChildeAdapter(getActivity(),list);
@@ -53,8 +65,7 @@ public class ClassChilBlankFragment extends BaseFragment<ImPresenter> implements
 
     @Override
     protected void initData() {
-        Bundle arguments = getArguments();
-        int id = arguments.getInt("id", 0);
+
         presenter.P6(id);
     }
 
@@ -89,6 +100,8 @@ public class ClassChilBlankFragment extends BaseFragment<ImPresenter> implements
 
     @Override
     public void OnSuucessHomeClick(FooHomeClickBean c) {
+
+
         List<FooHomeClickBean.DataDTO.DataDTOX> data = c.getData().getData();
         list.addAll(data);
         myHomeChildeAdapter.notifyDataSetChanged();

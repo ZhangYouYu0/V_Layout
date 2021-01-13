@@ -67,4 +67,10 @@ dependencies {
     implementation ('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
     }
+
+
+    debugImplementation('com.squareup.leakcanary:leakcanary-android:1.6.1')
+    releaseImplementation ('com.squareup.leakcanary:leakcanary-android-no-op:1.6.1')
+
+
 }

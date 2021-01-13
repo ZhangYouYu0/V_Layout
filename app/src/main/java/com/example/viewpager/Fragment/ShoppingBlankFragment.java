@@ -52,6 +52,18 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
         return R.layout.fragment_page_blank;
     }
 
+
+    //首页添加数据时，调动懒加载刷新数据
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser){
+            list.clear();
+        }else{
+            presenter.P5();
+        }
+    }
+
     @Override
     protected void initView(View view) {
         o = 0;
@@ -69,6 +81,7 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
         checked.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //通过奇偶数判断点击变化
                 o++;
                 if(o%2==0 && o!=0){
                     fooShoppingBean.setIfan(false);
@@ -95,6 +108,7 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //通过奇偶数判断点击变化
                 j++;
                 if(j%2==0 && j!=0){
                     fooShoppingBean.setJudge(0);
@@ -108,23 +122,24 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
             }
         });
 
-
-
         list = new ArrayList<>();
         adapter = new MyShoppingAdapter(list,getActivity(),fooShoppingBean);
         recyclerview.setAdapter(adapter);
         initDelete();
     }
 
+
+
     public void initDelete(){
+
+        //点击方法
         adapter.setOnClickItemDelete(new MyShoppingAdapter.OnClickItemDelete() {
             @Override
             public void delete(int pos) {
                 newpotions = pos;
-
-//                Toast.makeText(getContext(), "0", Toast.LENGTH_SHORT).show();
             }
         });
+        //删除条目
         bnt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -136,11 +151,7 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
 
     @Override
     protected void initData() {
-            presenter.P5();
-            if(list.size()>0 && list!=null){
-                list.clear();
-                presenter.P5();
-            }
+            presenter.P5(); //请求数据
     }
 
     @Override
@@ -170,17 +181,19 @@ public class ShoppingBlankFragment extends BaseFragment<ImPresenter> implements 
 
     @Override
     public void OnSuucessShooping(FooShoppingBean s) {
+        //加载数据
         List<FooShoppingBean.DataDTO.CartListDTO> cartList = s.getData().getCartList();
 
         list.addAll(cartList);
         length =list.size();
         boolean ifan = fooShoppingBean.isIfan();
+        //根据通过bean里设置的boolean值判断是否全选
         if(ifan){
             checked.setText("全选"+"("+length+")");
         }else{
             checked.setText("全选"+"(0)");
         }
-
+        //刷新适配器
         adapter.notifyDataSetChanged();
 
     }

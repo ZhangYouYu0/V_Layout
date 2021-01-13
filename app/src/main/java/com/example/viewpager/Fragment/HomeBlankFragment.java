@@ -113,7 +113,11 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     private ArrayList<FooHomeBean.DataDTO.TopicListDTO> topicListDTOS;
     private SingleLayoutHelper singleLayoutHelper12;
     private MainSingleadapter14 mainSingleadapter14;
-
+    private  MainSingleAdapter mainSingleAdapter;
+    MainSingleAdapter5 mainSingleAdapter5;
+    MainSingleAdapter6 mainSingleAdapter6;
+    DelegateAdapter delegateAdapter;
+    VirtualLayoutManager virtualLayoutManager;
     public HomeBlankFragment() {
         // Required empty public constructor
     }
@@ -155,108 +159,90 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     @Override
     protected void initView(View view) {
         recyclerview = view.findViewById(R.id.recyclerview);
-        VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(getActivity());
+        virtualLayoutManager = new VirtualLayoutManager(getActivity());
         RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
         recyclerview.setRecycledViewPool(recycledViewPool);
 
         recycledViewPool.setMaxRecycledViews(0,10);
 
-        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
-        MainSingleAdapter mainSingleAdapter = new MainSingleAdapter(singleLayoutHelper,getActivity());
+        //搜索栏
+        initSearch();
 
-        bannerDTOS = new ArrayList<>();
-        SingleLayoutHelper singleLayoutHelper1 = new SingleLayoutHelper();
-        mainSingleAdapter1 = new MainSingleAdapter1(singleLayoutHelper1,getActivity(),bannerDTOS);
+        //banner图展示
+        initBanner();
+
+        //1网格布局
+        initOneGrid();
+
+        //品牌制造商
+        initBrand();
+
+        //2网格布局
+        initTwoGrid();
+
+        //新品首发
+        initNewproduct();
+
+        //3网格布局
+        initThreeGrid();
+
+        //人气推荐
+        initPopuarity();
+
+        //1线性布局
+        initOnwLinear();
+
+        //专题精选
+        initSpecial();
+
+        //recyclerview嵌套recyclerview
+        initRecyclview();
+
+        //居家
+        initFamily();
+
+        //4网格布局
+        initFourGrid();
+
+        //餐厨
+        initEathutch();
+
+        //5网格布局
+        initFiveGrid();
+
+        //饮食
+        initFood();
+
+        //6网格布局
+        initSixGrid();
+
+        //配件
+        initAccessories();
+
+        //7网格布局
+        initSevenGrid();
+
+        //服装
+        initClothing();
+
+        //8网格布局
+        initEightGrid();
+
+        //婴童
+        initBaby();
+
+        //9网格布局
+        initNineGrid();
 
 
-        channelDTOS = new ArrayList<>();
-        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(5);
-        gridLayoutHelper.setSpanCount(5);
-        mainGridAdapter = new MainGridAdapter(gridLayoutHelper, getActivity(), channelDTOS);
+        //添加适配器
+        initAdapter();
 
+        initItemClick();
+    }
 
-        SingleLayoutHelper singleLayoutHelper2 = new SingleLayoutHelper();
-        mainSingleAdapte2r = new MainSingleAdapter2(singleLayoutHelper2,getActivity());
-
-        brandListDTOS = new ArrayList<>();
-        GridLayoutHelper gridLayoutHelper1 = new GridLayoutHelper(2);
-        mainGridAdapter1 = new MainGridAdapter1(gridLayoutHelper1, getActivity(),brandListDTOS);
-
-
-        SingleLayoutHelper singleLayoutHelper3 = new SingleLayoutHelper();
-        mainSingleAdapter3 = new MainSingleAdapter3(singleLayoutHelper3,getActivity());
-
-        newGoodsListDTOS = new ArrayList<>();
-        GridLayoutHelper gridLayoutHelper2 = new GridLayoutHelper(2);
-        mainGridAdapter2 = new MainGridAdapter2(gridLayoutHelper2,getActivity(),newGoodsListDTOS);
-
-        SingleLayoutHelper singleLayoutHelper4 = new SingleLayoutHelper();
-        mainSingleAdapter4 = new MainSingleAdapter4(singleLayoutHelper4, getActivity());
-
-        hotGoodsListDTOS = new ArrayList<>();
-        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
-        mainGridAdapter3 = new MainLineranAdapter(linearLayoutHelper,getActivity(),hotGoodsListDTOS);
-
-        SingleLayoutHelper singleLayoutHelper5 = new SingleLayoutHelper();
-        MainSingleAdapter5 mainSingleAdapter5 = new MainSingleAdapter5(singleLayoutHelper5,getActivity());
-
-        topicListDTOS = new ArrayList<>();
-        singleLayoutHelper12 = new SingleLayoutHelper();
-        mainSingleadapter14 = new MainSingleadapter14(topicListDTOS,getActivity(),singleLayoutHelper);
-
-
-
-        SingleLayoutHelper singleLayoutHelper6 = new SingleLayoutHelper();
-        MainSingleAdapter6 mainSingleAdapter6 = new MainSingleAdapter6(singleLayoutHelper6,getActivity());
-
-
-        GridLayoutHelper gridLayoutHelper3 = new GridLayoutHelper(2);
-        goodsListDTOS = new ArrayList<>();
-        mainGridAdapter31 = new MainGridAdapter3(gridLayoutHelper3,goodsListDTOS,getActivity());
-
-
-        singGoods = new ArrayList<>();
-        SingleLayoutHelper singleLayoutHelper7 = new SingleLayoutHelper();
-        mainSingleAdapter7 = new MainSingleAdapter7(singleLayoutHelper, singGoods, getActivity());
-
-        goodsListDTOS1 = new ArrayList<>();
-        GridLayoutHelper gridLayoutHelper4 = new GridLayoutHelper(2);
-        mainGridAdapter4 = new MainGridAdapter4(gridLayoutHelper4,goodsListDTOS1,getActivity());
-
-
-        SingleLayoutHelper singleLayoutHelper8 = new SingleLayoutHelper();
-        categoryListDTOS = new ArrayList<>();
-        mainSingleAdapter8 = new MainSingleAdapter8(singleLayoutHelper8,categoryListDTOS,getActivity());
-
-        GridLayoutHelper gridLayoutHelper5 = new GridLayoutHelper(2);
-        goodsListDTOS2 = new ArrayList<>();
-        mainGridAdapter5 = new MainGridAdapter5(gridLayoutHelper5,goodsListDTOS2,getActivity());
-
-        categoryListDTOS1 = new ArrayList<>();
-        SingleLayoutHelper singleLayoutHelper9 = new SingleLayoutHelper();
-        mainSingleAdapter9 = new MainSingleAdapter9(singleLayoutHelper9,categoryListDTOS1,getActivity());
-
-        goodsListDTOS3 = new ArrayList<>();
-        GridLayoutHelper gridLayoutHelper6 = new GridLayoutHelper(2);
-        mainGridAdapter6 = new MainGridAdapter6(gridLayoutHelper6, goodsListDTOS3, getActivity());
-
-        categoryListDTOS2 = new ArrayList<>();
-        SingleLayoutHelper singleLayoutHelper10 = new SingleLayoutHelper();
-        mainSingleAdapter10 = new MainSingleAdapter10(singleLayoutHelper10, categoryListDTOS2, getActivity());
-
-        goodsListDTOS4 = new ArrayList<>();
-        GridLayoutHelper gridLayoutHelper7 = new GridLayoutHelper(2);
-        mainGridAdapter7 = new MainGridAdapter7(gridLayoutHelper7,goodsListDTOS4,getActivity());
-
-        categoryListDTOS3 = new ArrayList<>();
-        SingleLayoutHelper singleLayoutHelper11 = new SingleLayoutHelper();
-        mainSingleAdapter11 = new MainSingleAdapter11(singleLayoutHelper11,categoryListDTOS3,getActivity());
-
-        goodsListDTOS5 = new ArrayList<>();
-        GridLayoutHelper gridLayoutHelper8 = new GridLayoutHelper(2);
-        mainGridAdapter8 = new MainGridAdapter8(gridLayoutHelper8,goodsListDTOS5,getActivity());
-
-        DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
+    private void initAdapter() {
+        delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainSingleAdapter);
         delegateAdapter.addAdapter(mainSingleAdapter1);
         delegateAdapter.addAdapter(mainGridAdapter);
@@ -265,7 +251,7 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         delegateAdapter.addAdapter(mainSingleAdapter3);
         delegateAdapter.addAdapter(mainGridAdapter2);
         delegateAdapter.addAdapter(mainSingleAdapter4);
-        delegateAdapter.addAdapter(this.mainGridAdapter3);
+        delegateAdapter.addAdapter(mainGridAdapter3);
         delegateAdapter.addAdapter(mainSingleAdapter5);
         delegateAdapter.addAdapter(mainSingleadapter14);
         delegateAdapter.addAdapter(mainSingleAdapter6);
@@ -282,12 +268,171 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         delegateAdapter.addAdapter(mainGridAdapter8);
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
+    }
 
+    private void initNineGrid() {
+        goodsListDTOS5 = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper8 = new GridLayoutHelper(2);
+        mainGridAdapter8 = new MainGridAdapter8(gridLayoutHelper8,goodsListDTOS5,getActivity());
+    }
 
-        initItemClick();
+    private void initBaby() {
+        categoryListDTOS3 = new ArrayList<>();
+        SingleLayoutHelper singleLayoutHelper11 = new SingleLayoutHelper();
+        mainSingleAdapter11 = new MainSingleAdapter11(singleLayoutHelper11,categoryListDTOS3,getActivity());
+
+    }
+
+    private void initEightGrid() {
+        goodsListDTOS4 = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper7 = new GridLayoutHelper(2);
+        mainGridAdapter7 = new MainGridAdapter7(gridLayoutHelper7,goodsListDTOS4,getActivity());
+    }
+
+    private void initClothing() {
+        categoryListDTOS2 = new ArrayList<>();
+        SingleLayoutHelper singleLayoutHelper10 = new SingleLayoutHelper();
+        mainSingleAdapter10 = new MainSingleAdapter10(singleLayoutHelper10, categoryListDTOS2, getActivity());
+    }
+
+    private void initSevenGrid() {
+        goodsListDTOS3 = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper6 = new GridLayoutHelper(2);
+        mainGridAdapter6 = new MainGridAdapter6(gridLayoutHelper6, goodsListDTOS3, getActivity());
+    }
+
+    private void initAccessories() {
+        categoryListDTOS1 = new ArrayList<>();
+        SingleLayoutHelper singleLayoutHelper9 = new SingleLayoutHelper();
+        mainSingleAdapter9 = new MainSingleAdapter9(singleLayoutHelper9,categoryListDTOS1,getActivity());
+    }
+
+    private void initSixGrid() {
+        GridLayoutHelper gridLayoutHelper5 = new GridLayoutHelper(2);
+        goodsListDTOS2 = new ArrayList<>();
+        mainGridAdapter5 = new MainGridAdapter5(gridLayoutHelper5,goodsListDTOS2,getActivity());
+    }
+
+    private void initFood() {
+        SingleLayoutHelper singleLayoutHelper8 = new SingleLayoutHelper();
+        categoryListDTOS = new ArrayList<>();
+        mainSingleAdapter8 = new MainSingleAdapter8(singleLayoutHelper8,categoryListDTOS,getActivity());
+    }
+
+    private void initFiveGrid() {
+        goodsListDTOS1 = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper4 = new GridLayoutHelper(2);
+        mainGridAdapter4 = new MainGridAdapter4(gridLayoutHelper4,goodsListDTOS1,getActivity());
+    }
+
+    private void initEathutch() {
+        singGoods = new ArrayList<>();
+        SingleLayoutHelper singleLayoutHelper7 = new SingleLayoutHelper();
+        mainSingleAdapter7 = new MainSingleAdapter7(singleLayoutHelper7, singGoods, getActivity());
+    }
+
+    private void initFourGrid() {
+        GridLayoutHelper gridLayoutHelper3 = new GridLayoutHelper(2);
+        goodsListDTOS = new ArrayList<>();
+        mainGridAdapter31 = new MainGridAdapter3(gridLayoutHelper3,goodsListDTOS,getActivity());
+    }
+
+    private void initFamily() {
+        SingleLayoutHelper singleLayoutHelper6 = new SingleLayoutHelper();
+         mainSingleAdapter6 = new MainSingleAdapter6(singleLayoutHelper6,getActivity());
+
+    }
+
+    private void initRecyclview() {
+        topicListDTOS = new ArrayList<>();
+        singleLayoutHelper12 = new SingleLayoutHelper();
+        mainSingleadapter14 = new MainSingleadapter14(topicListDTOS,getActivity(),singleLayoutHelper12);
+    }
+
+    private void initSpecial() {
+        SingleLayoutHelper singleLayoutHelper5 = new SingleLayoutHelper();
+        mainSingleAdapter5 = new MainSingleAdapter5(singleLayoutHelper5,getActivity());
+    }
+
+    private void initOnwLinear() {
+        hotGoodsListDTOS = new ArrayList<>();
+        LinearLayoutHelper linearLayoutHelper = new LinearLayoutHelper();
+        mainGridAdapter3 = new MainLineranAdapter(linearLayoutHelper,getActivity(),hotGoodsListDTOS);
+    }
+
+    private void initPopuarity() {
+        SingleLayoutHelper singleLayoutHelper4 = new SingleLayoutHelper();
+        mainSingleAdapter4 = new MainSingleAdapter4(singleLayoutHelper4, getActivity());
+
+    }
+
+    private void initThreeGrid() {
+        newGoodsListDTOS = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper2 = new GridLayoutHelper(2);
+        mainGridAdapter2 = new MainGridAdapter2(gridLayoutHelper2,getActivity(),newGoodsListDTOS);
+
+    }
+
+    private void initNewproduct() {
+        SingleLayoutHelper singleLayoutHelper3 = new SingleLayoutHelper();
+        mainSingleAdapter3 = new MainSingleAdapter3(singleLayoutHelper3,getActivity());
+
+    }
+
+    private void initTwoGrid() {
+
+        brandListDTOS = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper1 = new GridLayoutHelper(2);
+        mainGridAdapter1 = new MainGridAdapter1(gridLayoutHelper1, getActivity(),brandListDTOS);
+
+    }
+
+    private void initBrand() {
+        SingleLayoutHelper singleLayoutHelper2 = new SingleLayoutHelper();
+        mainSingleAdapte2r = new MainSingleAdapter2(singleLayoutHelper2,getActivity());
+
+    }
+
+    private void initOneGrid() {
+        channelDTOS = new ArrayList<>();
+        GridLayoutHelper gridLayoutHelper = new GridLayoutHelper(5);
+        gridLayoutHelper.setSpanCount(5);
+        mainGridAdapter = new MainGridAdapter(gridLayoutHelper, getActivity(), channelDTOS);
+    }
+
+    private void initBanner() {
+        bannerDTOS = new ArrayList<>();
+        SingleLayoutHelper singleLayoutHelper1 = new SingleLayoutHelper();
+        mainSingleAdapter1 = new MainSingleAdapter1(singleLayoutHelper1,getActivity(),bannerDTOS);
+
+    }
+
+    private void initSearch() {
+        SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        mainSingleAdapter = new MainSingleAdapter(singleLayoutHelper,getActivity());
     }
 
     private void initItemClick() {
+        //居家跳转购物车详情页
+        mainGridAdapter31.setDj(new MainGridAdapter3.dj() {
+            @Override
+            public void dj(int pos) {
+                Intent intent = new Intent(getActivity(), SpXqMainActivity.class);
+                intent.putExtra("id",pos);
+                startActivity(intent);
+            }
+        });
+
+        //锅具跳转购物车详情页
+        mainGridAdapter4.setDj(new MainGridAdapter4.dj() {
+            @Override
+            public void dj(int pos) {
+                Intent intent = new Intent(getActivity(), SpXqMainActivity.class);
+                intent.putExtra("id",pos);
+                startActivity(intent);
+            }
+        });
+
 
         //人气推送点击事件
         mainGridAdapter3.setDj(new MainLineranAdapter.dj() {
@@ -296,9 +441,7 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
                 FooHomeBean.DataDTO.HotGoodsListDTO hotGoodsListDTO = hotGoodsListDTOS.get(pos);
                 Intent intent = new Intent(getActivity(), HomeChileShoppingMainActivity.class);
                 intent.putExtra("id",hotGoodsListDTO.getId());
-             //   Toast.makeText(getContext(), hotGoodsListDTO.getId()+"*/", Toast.LENGTH_SHORT).show();
                 startActivity(intent);
-                Log.e("TAG", "dj: "+hotGoodsListDTO.getId() );
             }
         });
 
@@ -462,14 +605,4 @@ public class HomeBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     public void OnErro(String err) {
         Log.e("TAG", "OnErro: "+err );
     }
-//
-//    @Override
-//    public void OnSuucess(FooHomeBean i) {
-
-//    }
-//
-//    @Override
-//    public void OnErro(String err) {
-//        Log.e("TAG", "OnErro: "+err );
-//    }
 }

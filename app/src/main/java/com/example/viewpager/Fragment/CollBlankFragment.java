@@ -13,13 +13,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.LinearLayoutHelper;
+import com.bumptech.glide.Glide;
 import com.example.mylibrary.Base.BaseFragment;
 import com.example.viewpager.CollAdaoter.MainLinearAdapter1;
 import com.example.viewpager.Contract.C;
@@ -68,7 +72,7 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
     int i=1;
     private   ArrayList<Bean.DataBeanX.DataBean> list;
     private LinearLayoutHelper linearSnapHelper;
-
+    int newcount=0;
     private NestedScrollView n;
     private Button z;
 
@@ -123,7 +127,7 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
         recyclerview.setRecycledViewPool(recycledViewPool);
 
-
+        //这个是调转到登录页面，没用瞎写
         z.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -131,6 +135,7 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
             }
         });
 
+        //通过点击次数增加i变量达到翻页效果
         s.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,6 +150,7 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
             }
         });
 
+        //通过点击次数减i变量达到翻页效果
      x.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -163,18 +169,94 @@ public class CollBlankFragment extends BaseFragment<ImPresenter> implements C.Vi
         linearSnapHelper = new LinearLayoutHelper();
         mainLinearAdapter11 = new MainLinearAdapter1(getActivity(),list,linearSnapHelper);
 
-
+        //vlayout
         DelegateAdapter delegateAdapter = new DelegateAdapter(virtualLayoutManager);
         delegateAdapter.addAdapter(mainLinearAdapter11);
 
 
         recyclerview.setLayoutManager(virtualLayoutManager);
         recyclerview.setAdapter(delegateAdapter);
+        initClickItem();//点击方法
+    }
 
+    private void initClickItem() {
+        //通过适配器的item点击来获取所点击的item下标，并回调传值
+        mainLinearAdapter11.setDj(new MainLinearAdapter1.dj() {
+            @Override
+            public void dj(int pos) {
+                 newcount = pos;
+                 //弹出pop页面，展现大图模式
+                View root = LayoutInflater.from(getContext()).inflate(R.layout.pop_item1, null, false);
+                PopupWindow popupWindow = new PopupWindow(root,ViewGroup.LayoutParams.MATCH_PARENT,ViewGroup.LayoutParams.MATCH_PARENT);
+                popupWindow.setFocusable(true);
+                popupWindow.setOutsideTouchable(true);
+
+
+                //找控件
+                ImageView image = root.findViewById(R.id.im_coll);
+                Glide.with(getContext()).load(list.get(newcount).getScene_pic_url()).into(image);
+                Button s = root.findViewById(R.id.bnt_s1);
+                Button x = root.findViewById(R.id.bnt_x1);
+                Button z = root.findViewById(R.id.bnt_0);
+
+                z.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        popupWindow.dismiss();
+                    }
+                });
+                s.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //判断，有时一层判断会因点击过快没过滤掉不符合规则的数值
+                    newcount--;
+                    if(newcount>=0){
+                        if(newcount!=-1){
+                            Glide.with(getContext()).load(list.get(newcount).getScene_pic_url()).into(image);
+                        }
+                    }
+
+                    }
+                });
+
+
+                x.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //判断，有时一层判断会因点击过快没过滤掉不符合规则的数值
+                        newcount++;
+                        if(newcount<10){
+                            if(newcount!=10){
+                                Glide.with(getContext()).load(list.get(newcount).getScene_pic_url()).into(image);
+                            }
+                        }
+
+                    }
+                });
+
+                setback(0.5f);
+                popupWindow.showAsDropDown(root,200,400);//X Y 位置
+                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
+                    @Override
+                    public void onDismiss() {
+                        //点击后，触发背景色
+                        setback(1f);
+                    }
+                });
+            }
+        });
+    }
+
+    private void setback(float v) {
+        //传递颜色值
+        WindowManager.LayoutParams attributes = getActivity().getWindow().getAttributes();
+        attributes.alpha=v;
+        getActivity().getWindow().setAttributes(attributes);
     }
 
     @Override
     protected void initData() {
+        //默认为0最大值为1
         presenter.P2(i);
     }
 

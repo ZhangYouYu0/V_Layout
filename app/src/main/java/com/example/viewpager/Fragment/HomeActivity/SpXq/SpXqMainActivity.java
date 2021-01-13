@@ -41,16 +41,14 @@ import com.example.viewpager.HomeAdapter.HomeXq.Myxx;
 import com.example.viewpager.MainActivity;
 import com.example.viewpager.P.ImPresenter;
 import com.example.viewpager.R;
-import com.example.viewpager.ShoppingAdapter.MyShoppingAdapter;
 import com.example.viewpager.TwoPresenter.TwoPresenter;
 import com.example.viewpager.TwoView.TwoView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.JarEntry;
 
 public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.View, C1.View, TwoView {
-
+    int ss=0;
     private RecyclerView recyclerview;
     private int id;
     private ArrayList<FooSpBean.DataBeanx.InfoBean> infoBeans;
@@ -76,7 +74,7 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
 
     @Override
     protected void initData() {
-        twoPresenter = new TwoPresenter(this);
+
         presenter.P7(id);
         presenter.P1();
 
@@ -86,8 +84,7 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
     protected void initView() {
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
-        //Toast.makeText(this, id+"///0000", Toast.LENGTH_SHORT).show();
-        add = findViewById(R.id.tv_home_spxq_add);
+        add = findViewById(R.id.tv_home_spxq_add1);
         recyclerview = findViewById(R.id.recyclerview_home_spxq);
         im_gwc = findViewById(R.id.im_home_spxq_gwc);
         shop = findViewById(R.id.tv_home_sqxq_Shop);
@@ -178,8 +175,6 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
         List<FooHomeBean.DataDTO.CategoryListDTO.GoodsListDTO> goodsList = i.getData().getCategoryList().get(2).getGoodsList();
         goodsListDTOS.addAll(goodsList);
         myGridApdater.notifyDataSetChanged();
-//    list.addAll(goodsList);
-//    myGridApdater1.notifyDataSetChanged();
     }
 
 
@@ -218,13 +213,6 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
 
         List<FooSpBean.DataBeanx.ProductListBean> productList = c.getData().getProductList();
 
-//        add.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//
-//            }
-//        });
 
         im_gwc.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -239,16 +227,23 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
                 Button bnt = root.findViewById(R.id.bnt_ok);
                 TextView num = root.findViewById(R.id.tv_home_spxq_number);
                 nu = 0;
+
                 num.setText(""+nu);
                 jia.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        if(nu<=10){
                             nu++;
                             num.setText(""+nu);
-                        }
+                            bnt.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Toast.makeText(SpXqMainActivity.this, nu+"", Toast.LENGTH_SHORT).show();
+                                    twoPresenter = new TwoPresenter(SpXqMainActivity.this);
+                                    twoPresenter.p0(productList.get(0).getGoods_id(),nu,productList.get(0).getId());
+                                    popupWindow.dismiss();
+                                }
 
+                            });
                     }
                 });
                 jian.setOnClickListener(new View.OnClickListener() {
@@ -256,27 +251,34 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
                     public void onClick(View v) {
 
                         if(nu>=0) {
-                            if(nu!=-1){
                                 nu--;
-                                num.setText("" + nu);
-                            }
-
+                                num.setText(""+nu);
+                                bnt.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    int i = nu;
+                                    Toast.makeText(SpXqMainActivity.this, i+"", Toast.LENGTH_SHORT).show();
+                                    twoPresenter = new TwoPresenter(SpXqMainActivity.this);
+                                    twoPresenter.p0(productList.get(0).getGoods_id(),nu,productList.get(0).getId());
+                                    popupWindow.dismiss();
+                                }
+                            });
                         }
 
                     }
                 });
+
                 bnt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String s = num.getText().toString();
-                        Integer integer = new Integer(s);
-                        int i = integer.intValue();
+                        int i = nu;
                         Toast.makeText(SpXqMainActivity.this, i+"", Toast.LENGTH_SHORT).show();
-                       twoPresenter.p0(productList.get(0).getGoods_id(),nu,productList.get(0).getId());
+                        twoPresenter = new TwoPresenter(SpXqMainActivity.this);
+                        twoPresenter.p0(productList.get(0).getGoods_id(),nu,productList.get(0).getId());
                         popupWindow.dismiss();
                     }
-                });
 
+                });
                 setback(0.5f);
                 popupWindow.showAsDropDown(root,200,400);
                 popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
@@ -299,7 +301,7 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
     public void OnSuucessHomeGwc(XqBean xqBean) {
         Toast.makeText(this, "cg", Toast.LENGTH_SHORT).show();
         List<XqBean.DataDTO.AttributeDTO> attribute = xqBean.getData().getAttribute();
-        Toast.makeText(this, attribute.get(0).getName()+"", Toast.LENGTH_SHORT).show();
+    //    Toast.makeText(this, attribute.get(0).getName()+"", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -321,7 +323,7 @@ public class SpXqMainActivity extends BaseActivity<ImPresenter> implements C.Vie
     @Override
     public void Data(FooGwcBean fooGwcBean) {
         List<FooGwcBean.DataDTO.CartListDTO> cartList = fooGwcBean.getData().getCartList();
-        Toast.makeText(this, cartList.get(0).getGoods_id()+"/*/*/*/*/", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "添加成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override

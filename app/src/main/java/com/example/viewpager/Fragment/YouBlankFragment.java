@@ -15,7 +15,9 @@ import com.example.viewpager.MainActivity;
 import com.example.viewpager.P.ImPresenter;
 import com.example.viewpager.R;
 import com.example.viewpager.YouAdapter.Adapasda;
+import com.tencent.mmkv.MMKV;
 
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
@@ -34,6 +36,7 @@ public class YouBlankFragment extends BaseFragment<ImPresenter> {
     boolean AnIf = false;
     private RecyclerView recycerview;
     private TextView login;
+    private int j;
 
     @Override
     public int ID() {
@@ -43,32 +46,37 @@ public class YouBlankFragment extends BaseFragment<ImPresenter> {
     @Override
     protected void initView(View view) {
         Adapasda adapasda = new Adapasda(getActivity());
+
+
         login = view.findViewById(R.id.tv_you_login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), LoginMainActivity.class);
-//                startActivityForResult(intent,0);
+
+                new Thread(){
+                    @Override
+                    public void run() {
+
+                        j = 0;
+                        MMKV mmkv = MMKV.defaultMMKV();
+//                        Set<String> loginInfo = 、
+//                        for (String string: loginInfo) {
+//                            j++;
+//                        }
+//                        if (j>0){
+//                            Toast.makeText(getContext(), "请勿重复登录", Toast.LENGTH_SHORT).show();
+//                        }else{
+//
+//                            Intent intent = new Intent(getActivity(), LoginMainActivity.class);
+//                            startActivityForResult(intent,0);
+//                        }
+
+
+                    }
+                }.start();
+
             }
         });
-//        if(AnIf){
-//            AnIf=true;
-//        }else{
-//            num = 0;
-//            subscribe = Observable.interval(1, 1, TimeUnit.SECONDS)
-//                    .subscribeOn(Schedulers.io())
-//                    .observeOn(AndroidSchedulers.mainThread())
-//                    .subscribe(new Consumer<Long>() {
-//                        @Override
-//                        public void accept(Long aLong) throws Exception {
-//                            num++;
-//                            if(num==1){
-//
-//                                subscribe.dispose();
-//                            }
-//                        }
-//                    });
-//        }
 
     }
 

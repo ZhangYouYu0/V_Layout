@@ -32,7 +32,7 @@ public class TwoMode implements Mode1 {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ApiService0.class)
-                .get(goodsId,1,productId)
+                .get(goodsId,number,productId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<FooGwcBean>() {

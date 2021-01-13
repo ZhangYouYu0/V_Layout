@@ -1,8 +1,10 @@
 package com.example.viewpager.Fragment.ClassfiyChild;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +43,8 @@ public class ChildBlankFragment extends BaseFragment<ImPresenter> implements C.V
     private MainGridAdapter9 mainGridAdapter9;
     private ArrayList<String> strings;
     private MainSingleAdapter13 mainSingleAdapter13;
+    private int id;
+    private int index;
 
     @Override
     public int ID() {
@@ -50,7 +54,9 @@ public class ChildBlankFragment extends BaseFragment<ImPresenter> implements C.V
     @Override
     protected void initView(View view) {
         recyclerview = view.findViewById(R.id.recyclerview_Chide);
-
+        Bundle arguments = getArguments();
+        id = arguments.getInt("id");
+        index = arguments.getInt("index", 0);
         VirtualLayoutManager virtualLayoutManager = new VirtualLayoutManager(getContext());
         RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
         recyclerview.setRecycledViewPool(recycledViewPool);
@@ -78,20 +84,12 @@ public class ChildBlankFragment extends BaseFragment<ImPresenter> implements C.V
     }
 
     private void initDj() {
-        mainGridAdapter9.setDj(new MainGridAdapter9.dj() {
-            @Override
-            public void dj(int pos) {
-                Toast.makeText(getContext(), pos+"", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), ClassfiyMainActivity.class);
-                intent.putExtra("id",pos);
-                startActivity(intent);
-            }
-        });
+
     }
 
     @Override
     protected void initData() {
-        int id = getArguments().getInt("id");
+
      //   Toast.makeText(getContext(), id+"", Toast.LENGTH_SHORT).show();
         presenter.P4(id);
     }
@@ -128,6 +126,19 @@ public class ChildBlankFragment extends BaseFragment<ImPresenter> implements C.V
         strings.add(name);
         mainSingleAdapter13.notifyDataSetChanged();
 
+
+
+        mainGridAdapter9.setDj(new MainGridAdapter9.dj() {
+            @Override
+            public void dj(int pos) {
+                String front_name = c.getData().getCurrentCategory().getFront_name();
+                Toast.makeText(getContext(), pos+"", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getActivity(), ClassfiyMainActivity.class);
+                intent.putExtra("id",index-1);
+                intent.putExtra("title",front_name);
+                startActivity(intent);
+            }
+        });
 
         List<FooClassfiyBean.DataDTO.CurrentCategoryDTO.SubCategoryListDTO> subCategoryList1 = c.getData().getCurrentCategory().getSubCategoryList();
         subCategoryListDTOS.addAll(subCategoryList1);

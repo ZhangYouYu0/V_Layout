@@ -54,12 +54,29 @@ public class MainLinearAdapter1 extends DelegateAdapter.Adapter {
         View root = LayoutInflater.from(context).inflate(R.layout.ll_item, null, false);
         TextView viewById = root.findViewById(R.id.tv123);
         Glide.with(context).load(dataDTO.getScene_pic_url()).into(linViewHolder.imageView);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dj!=null){
+                    dj.dj(position);
+                }
+            }
+        });
 
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface dj{
+        void dj(int pos);
+    }
+    dj dj;
+
+    public void setDj(MainLinearAdapter1.dj dj) {
+        this.dj = dj;
     }
 
     private class LinViewHolder extends RecyclerView.ViewHolder {

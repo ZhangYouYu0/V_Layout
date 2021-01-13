@@ -49,11 +49,28 @@ public class MainGridAdapter3 extends DelegateAdapter.Adapter {
         girdViewHolder.textView.setText(goodsListDTO.getName());
         girdViewHolder.textView1.setText("￥"+goodsListDTO.getRetail_price());
         Glide.with(context).load(goodsListDTO.getList_pic_url()).into(girdViewHolder.imageView);
+        girdViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dj!=null){
+                    dj.dj(goodsListDTO.getId());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    public interface dj{
+        void dj(int pos);
+    }
+    dj dj;
+
+    public void setDj(MainGridAdapter3.dj dj) {
+        this.dj = dj;
     }
 
     private class GirdViewHolder extends RecyclerView.ViewHolder {

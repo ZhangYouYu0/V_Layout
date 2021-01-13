@@ -32,6 +32,8 @@ public class ClassfiyMainActivity extends BaseActivity<ImPresenter> implements C
     private ViewPager viewpagwe;
     private ArrayList<Fragment> list;
     private int id0;
+    private Intent intent;
+    private String title;
 
     @Override
     protected int ID() {
@@ -47,6 +49,7 @@ public class ClassfiyMainActivity extends BaseActivity<ImPresenter> implements C
     protected void initView() {
         Intent intent = getIntent();
         id0 = intent.getIntExtra("id", 0);
+        title = intent.getStringExtra("title");
         viewpagwe = findViewById(R.id.viewpager_classfiy);
          tablayout = findViewById(R.id.Tablayout_classfiy);
     }
@@ -68,6 +71,8 @@ public class ClassfiyMainActivity extends BaseActivity<ImPresenter> implements C
 
     @Override
     public void OnSuucessTab(FooTablayoutBean f) {
+
+
         List<FooTablayoutBean.DataDTO.CategoryListDTO> categoryList = f.getData().getCategoryList();
         list = new ArrayList<>();
         for (int i = 0; i < categoryList.size(); i++) {
@@ -75,6 +80,7 @@ public class ClassfiyMainActivity extends BaseActivity<ImPresenter> implements C
             ClassChilBlankFragment classChilBlankFragment = new ClassChilBlankFragment();
             Bundle bundle = new Bundle();
             bundle.putInt("id",id);
+            bundle.putString("title",categoryList.get(i).getFront_name());
             classChilBlankFragment.setArguments(bundle);
             list.add(classChilBlankFragment);
         }
@@ -90,6 +96,7 @@ public class ClassfiyMainActivity extends BaseActivity<ImPresenter> implements C
                 return list.size();
             }
         });
+
         viewpagwe.setCurrentItem(id0);
         tablayout.setupWithViewPager(viewpagwe);
         for (int i = 0; i < categoryList.size(); i++) {

@@ -34,11 +34,11 @@ public class MyUserAdapter extends RecyclerView.Adapter<MyUserAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyUserAdapter.ViewHolder holder, int position) {
-        FooSpBean.DataBeanx.CommentBean.DataBean dataBean = list.get(position);
-        holder.name.setText(dataBean.getNickname());
-        holder.title.setText(dataBean.getAdd_time());
-        holder.pl.setText(dataBean.getContent());
-        Glide.with(context).load(dataBean.getAvatar()).into(holder.imageView);
+//        FooSpBean.DataBeanx.CommentBean.DataBean dataBean = list.get(position);
+//        holder.name.setText(dataBean.getNickname());
+//        holder.title.setText(dataBean.getAdd_time());
+//        holder.pl.setText(dataBean.getContent());
+//        Glide.with(context).load(dataBean.getAvatar()).into(holder.imageView);
     }
 
     @Override
@@ -53,10 +53,10 @@ public class MyUserAdapter extends RecyclerView.Adapter<MyUserAdapter.ViewHolder
         ImageView imageView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            name=itemView.findViewById(R.id.tv_user_name);
-            title=itemView.findViewById(R.id.tv_user_title);
-            pl=itemView.findViewById(R.id.tv_user_desc);
-            imageView=itemView.findViewById(R.id.im_user);
+//            name=itemView.findViewById(R.id.tv_user_name);
+//            title=itemView.findViewById(R.id.tv_user_title);
+//            pl=itemView.findViewById(R.id.tv_user_desc);
+//            imageView=itemView.findViewById(R.id.im_user);
         }
     }
 }
